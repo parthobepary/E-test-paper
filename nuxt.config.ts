@@ -6,10 +6,10 @@ export default defineNuxtConfig({
         head: {
             charset: 'utf-16',
             viewport: 'width=500, initial-scale=1',
-            title: 'Test Project',
+            title: 'E-test paper',
             meta: [
                 // <meta name="description" content="My amazing site">
-                {name: 'description', content: 'Test Project.'}
+                {name: 'description', content: 'e-test paper'}
             ],
         }
     },
@@ -25,7 +25,8 @@ export default defineNuxtConfig({
     },
     modules: [
         '@nuxtjs/tailwindcss',
-        '@pinia/nuxt'
+        '@pinia/nuxt',
+        'nuxt-icon'
     ],
     vite: {
         css: {
