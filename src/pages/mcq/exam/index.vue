@@ -1,42 +1,33 @@
 <template>
     <div class="container mx-auto">
-        <div>
+        <div class="relative">
             <!-- exam header -->
             <div class="flex justify-center">
                 <h2 class="pt-10 pb-6">{{ exam.name }}</h2>
             </div>
-            <!-- tab option -->
-            <div class="flex justify-between bg px-4 py-2 rounded-md mx-2">
-                <div :class="isActive ? 'active' : ''" class="w-[50%] flex flex-col items-center rounded-md py-2">
-                    <button @click="active" class="text-[14px]">জ্ঞান ও অনুধাবন</button>
-                    <div :class="isActive ? 'block' : 'hidden'" class="w-12 h-1 rounded-lg bg-blue-600"></div>
+            <!-- exam details -->
+            <div class="bg-[#F3F4FA] py-4 px-2 set_height">
+                <McqsExamDetails :details="exam.details" />
+                <div class="absolute bottom-0 pb-10 w-full text-center">
+                    <button @click="startExam" class=" text-center bg-[#045D97] text-white px-4 py-1 rounded-lg">Participate Exam</button>
+                    <McqsExamConfirmModal @close-modal="closeModal($event)" :is-open="isModal"/>
                 </div>
-                <div :class="!isActive ? 'active' : ''" class="w-[50%] flex flex-col items-center rounded-md py-2">
-                    <button @click="inActive" class="text-[14px]">প্রয়োগ ও উচ্চতর দক্ষতা</button>
-                    <div :class="!isActive ? 'block' : 'hidden'" class="w-12 h-1 rounded-lg bg-blue-600"></div>
-                </div>
-            </div>
-            <!-- mcq -->
-            <div class="bg-[#F3F4FA] py-2 pt-8">
-                <div class="pl-3 flex items-center">
-                    <div class="border_left"></div>
-                    <p class=" text-[16px] pl-2">Bookmarked Questions</p>
-                </div>
-                <template v-if="exam && exam.mcqs && exam.mcqs.length">
-                    <div v-if="isActive">
-                        <ExamExpension :items="exam.mcqs" />
-                    </div>
-                    <div v-else>
-                       <LazyExamOpenExam :items="exam.mcqs"/>
-                    </div>
-                </template>
             </div>
         </div>
     </div>
 </template>
 <script setup>
 const exam = ref({
-    name: 'MCQ Practice',
+    name: 'MCQ exam',
+    details: {
+        exam_type: 'General Exam',
+        exam_mode: 'Exam',
+        exam_duration: '5',
+        per_question_mark: '1.00',
+        negative_mark: '0.00',
+        exam_start_time: 'Nov 4, 2022 8:22 PM',
+        exam_end_time: 'Nov 12, 2022 8:22 PM'
+    },
     mcqs: [
         {
             mcq: 'What is the name of our country ?',
@@ -131,27 +122,22 @@ const exam = ref({
         }
     ]
 });
-const isActive = ref(true)
-
-const inActive = () => {
-    isActive.value = false
-}
-const active = () => {
-    isActive.value = true
-}
+const isModal = ref(false)
+const startExam = () => {
+    isModal.value = true
+};
+const closeModal = () => {
+    isModal.value = false
+};
 </script>
 <style scoped>
-.bg {
-    background-color: rgba(4, 86, 137, 0.2);
-}
-
-.active {
-    background-color: white;
-    border-radius: 10px;
-}
-.border_left{
+.border_left {
     background-color: blue;
     width: 4px;
     height: 10px;
+}
+
+.set_height {
+    height: calc(100vh - 100px);
 }
 </style>

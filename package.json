@@ -15,5 +15,10 @@
     "nuxt-icon": "^0.4.1",
     "postcss": "^8.4.20",
     "tailwindcss": "^3.2.4"
+  },
+  "dependencies": {
+    "nuxt-headlessui": "^1.1.4",
+    "moment": "^2.29.4",
+    "@nuxtjs/moment": "^1.6.1"
   }
 }
