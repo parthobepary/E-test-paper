@@ -9,11 +9,11 @@
             <div class="flex justify-between items-center pr-4">
                 <div class="px-2 flex items-center">
                     <div class="border_left"></div>
-                    <p class=" text-[16px] pl-2">Remaining Time</p>
+                    <p class=" text-[18px] pl-2">Remaining Time</p>
                 </div>
                 <div class="flex justify-between pb-4">
                     <LazyMcqsExamTimer :validUntil="exam.details.valid_till" />
-                    <button class="ml-2 text-[16px] px-2 rounded-xl bg-[#045d97] py-0 text-white">Submit answer</button>
+                    <!-- <button class="ml-2 text-[12px] px-2 rounded-xl bg-[#045d97] py-0 text-white">Submit answer</button> -->
                 </div>
             </div>
             <!-- exam details -->
@@ -22,11 +22,207 @@
                     <div class="border_left"></div>
                     <p class=" text-[16px] pl-2">Questions : </p>
                 </div>
+                <div>
+                    <div v-if="!isSubmit">
+                        <LazyMcqsExamPerformExam @submit-answer="submitAnswer($event)" />
+                    </div>
+                    <div v-else>
+                        <ExamAnalysis :exam="data" />
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </template>
 <script setup>
+import ExamAnalysis from '~~/src/components/mcqs/exam/ExamAnalysis.vue';
+
+
+const data = {
+  "title": 23434,
+  "description": "<p>556565656</p>",
+  "duration": 12,
+  "total_marks": 12,
+  "pass_marks": 6,
+  "positive_marks": 1,
+  "negative_marks": 0,
+  "start_time": "2023-05-30T07:29:36.000000Z",
+  "end_time": "2023-05-30T07:30:00.000000Z",
+  "result_publish_time": "2023-05-30T07:31:00.000000Z",
+  "question": {
+    "id": 21,
+    "exam_id": 22,
+    "body": {
+      "max_sections": 1,
+      "sections": [
+        {
+          "title": "default",
+          "required": true,
+          "questions": [
+            {
+              "id": 1,
+              "question": "saw the baby ___.",
+              "question_image": null,
+              "a": "is weeping",
+              "b": "wept",
+              "c": "weeps",
+              "d": "weeping",
+              "e": null,
+              "answer": "d",
+              "answer_image": null,
+              "explanation": "d"
+            },
+            {
+              "id": 2,
+              "question": "I was tired that night. I ___ wood all; morning.",
+              "question_image": null,
+              "a": "was cutting",
+              "b": "cut",
+              "c": "had cut",
+              "d": "had been cutting",
+              "e": null,
+              "answer": "a",
+              "answer_image": null,
+              "explanation": "a"
+            },
+            {
+              "id": 3,
+              "question": "Many goats are grazing and few sheep ___ sleeping in the field.",
+              "question_image": null,
+              "a": "is",
+              "b": "are",
+              "c": "has been",
+              "d": "was",
+              "e": null,
+              "answer": "b",
+              "answer_image": null,
+              "explanation": "b"
+            },
+            {
+              "id": 4,
+              "question": "Did you use to ___ with dolls ?",
+              "question_image": null,
+              "a": "play",
+              "b": "played",
+              "c": "playing",
+              "d": "be played",
+              "e": null,
+              "answer": "a",
+              "answer_image": null,
+              "explanation": "a"
+            },
+            {
+              "id": 5,
+              "question": "Many people ----- the explosion.",
+              "question_image": null,
+              "a": "died from",
+              "b": "were killed",
+              "c": "have been dead",
+              "d": "were dead",
+              "e": null,
+              "answer": "a",
+              "answer_image": null,
+              "explanation": "a"
+            },
+            {
+              "id": 6,
+              "question": "Have you finished ___ that book yet?",
+              "question_image": null,
+              "a": "to read",
+              "b": "reading",
+              "c": "by reading",
+              "d": "with reading",
+              "e": null,
+              "answer": "b",
+              "answer_image": null,
+              "explanation": null
+            },
+            {
+              "id": 7,
+              "question": "I gave up ___ football when he got married.",
+              "question_image": null,
+              "a": "to play",
+              "b": "playing",
+              "c": "play",
+              "d": "of playing",
+              "e": null,
+              "answer": "b",
+              "answer_image": null,
+              "explanation": "b"
+            },
+            {
+              "id": 8,
+              "question": "when I ___ money, I will buy a book.",
+              "question_image": null,
+              "a": "may get",
+              "b": "may be got",
+              "c": "will get",
+              "d": "get",
+              "e": null,
+              "answer": "d",
+              "answer_image": null,
+              "explanation": "d"
+            }
+          ]
+        }
+      ]
+    },
+    "created_at": "2023-05-30T07:31:06.000000Z",
+    "updated_at": "2023-05-30T07:31:06.000000Z"
+  },
+  "result": {
+    "marks": 4,
+    "positive_marks": 4,
+    "negative_marks": 0,
+    "duration": 10,
+    "submitted": true,
+    "answers": [
+      {
+        "title": "default",
+        "answers": [
+          {
+            "mcq_id": 1,
+            "user_answer": "a"
+          },
+          {
+            "mcq_id": 2,
+            "user_answer": "a"
+          },
+          {
+            "mcq_id": 3,
+            "user_answer": "b"
+          },
+          {
+            "mcq_id": 4,
+            "user_answer": "c"
+          },
+          {
+            "mcq_id": 5,
+            "user_answer": "d"
+          },
+          {
+            "mcq_id": 6,
+            "user_answer": "d"
+          },
+          {
+            "mcq_id": 7,
+            "user_answer": "b"
+          },
+          {
+            "mcq_id": 8,
+            "user_answer": "d"
+          }
+        ]
+      }
+    ]
+  }
+}
+
+
+
+
+
+
 const exam = ref({
     name: 'MCQ exam',
     details: {
@@ -133,6 +329,11 @@ const exam = ref({
         }
     ]
 });
+
+const isSubmit = ref(false);
+const submitAnswer = (evn) => {
+    isSubmit.value = evn
+}
 </script>
 <style scoped>
 .border_left {

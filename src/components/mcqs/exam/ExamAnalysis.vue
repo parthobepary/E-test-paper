@@ -1,17 +1,5 @@
 <template>
     <div class="pt-3">
-      <div class="flex justify-center gap-3 md:gap-8 mb-8">
-        <div class="flex flex-col items-center bg-white px-4 md:px-10 py-4 rounded-2xl shadow-md">
-          <p>Time Taken</p>
-          <img class="h-12 md:h-auto py-2" src="/exam/time.png" alt="time">
-          <p>{{ calculateMinuteAndSeconds(exam.result.duration) || 0 }}</p>
-        </div>
-        <div class="flex flex-col items-center bg-white px-3 md:px-10 py-4 rounded-2xl shadow-md">
-          <p>Mark Gained</p>
-          <img class="h-12 md:h-auto py-2" src="/exam/gained.png" alt="">
-          <p>{{exam.result.marks || 0}}</p>
-        </div>
-      </div>
       <template v-if="exam.question.body.sections && exam.question.body.sections.length">
         <div v-for="(section, index) in exam.question.body.sections" :key="index + section.title">
           <div v-for="(question, i) in section.questions" :key="i">
@@ -106,13 +94,7 @@
             : "";
   };
   </script>
-  <style lang="scss" scoped>
-  @mixin backgroundBorder($color, $border-color) {
-    background-color: $color;
-    border: 0.5px solid $border-color;
-    border-radius: 5px;
-  }
-  
+  <style  scoped>
   .explanation{
     background-color: rgba(247, 148, 29, 0.15);
   }
@@ -122,24 +104,6 @@
     border-radius: 10px;
     margin: 10px;
     cursor: pointer;
-  }
-  
-  .selected-answer {
-    @include backgroundBorder(#ddf5ff, #008fca);
-  }
-  
-  .correct-answer {
-    @include backgroundBorder(#ddf5ff, #008fca);
-    background-color: #ddf5ff;
-  }
-  
-  .wrong-answer {
-    @include backgroundBorder(#fddddd, #f00);
-    background-color: rgba(234, 183, 183, 0.3);
-  }
-  
-  .not-answered {
-    @include backgroundBorder(rgb(88, 178, 108), #f00);
   }
   
   .btn-submit {
