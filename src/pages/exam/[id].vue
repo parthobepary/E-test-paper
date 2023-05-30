@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container mx-auto">
         <div>
             <!-- exam header -->
             <div class="flex justify-center">
