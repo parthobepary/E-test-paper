@@ -9,7 +9,7 @@
             <div class="bg-[#F3F4FA] py-4 set_height">
                 <McqsExamDetails :details="exam.details" />
                 <div class="absolute bottom-0 pb-10 w-full text-center">
-                    <button @click="startExam" class=" text-center bg-[#045D97] text-white px-8 py-1 rounded-lg">Participate Exam</button>
+                    <button @click="startExam" class=" text-center btn-bg text-white px-8 py-1 rounded-lg">Participate Exam</button>
                     <McqsExamConfirmModal @close-modal="closeModal($event)" :is-open="isModal"/>
                 </div>
             </div>
@@ -137,6 +137,9 @@ const closeModal = () => {
     height: 10px;
 }
 
+.btn-bg{
+    background: linear-gradient(102.17deg, #045689 0.04%, #0381E0 100%);
+}
 .set_height {
     height: calc(100vh - 100px);
 }

@@ -1,27 +1,21 @@
 <template>
     <div class="container mx-auto">
         <div>
-            <!-- exam header -->
-            <div class="flex justify-center">
-                <h2 class="pt-10 pb-6">{{ exam.name }}</h2>
-            </div>
             <!-- tab option -->
-            <div class="flex justify-between bg px-4 py-2 rounded-md mx-2">
-                <div :class="isActive ? 'active' : ''" class="w-[50%] flex flex-col items-center rounded-md py-2">
-                    <button @click="active" class="text-[14px]">জ্ঞান ও অনুধাবন</button>
-                    <div :class="isActive ? 'block' : 'hidden'" class="w-12 h-1 rounded-lg bg-blue-600"></div>
-                </div>
-                <div :class="!isActive ? 'active' : ''" class="w-[50%] flex flex-col items-center rounded-md py-2">
-                    <button @click="inActive" class="text-[14px]">প্রয়োগ ও উচ্চতর দক্ষতা</button>
-                    <div :class="!isActive ? 'block' : 'hidden'" class="w-12 h-1 rounded-lg bg-blue-600"></div>
+            <div class="bg-white py-3">
+                <div class="flex justify-between tab_bg px-1 rounded-md mx-2 py-1">
+                    <div :class="isActive ? 'active' : ''" class="w-[50%] flex flex-col items-center rounded-sm pb-1">
+                        <button @click="active" class="text-[14px]">জ্ঞান ও অনুধাবন</button>
+                        <div :class="isActive ? 'block' : 'hidden'" class="w-12 h-1 rounded-lg bg-[#2E3192]"></div>
+                    </div>
+                    <div :class="!isActive ? 'active' : ''" class="w-[50%] flex flex-col items-center rounded-sm pb-1">
+                        <button @click="inActive" class="text-[14px]">প্রয়োগ ও উচ্চতর দক্ষতা</button>
+                        <div :class="!isActive ? 'block' : 'hidden'" class="w-12 h-1 rounded-lg bg-[#2E3192]"></div>
+                    </div>
                 </div>
             </div>
             <!-- mcq -->
-            <div class="bg-[#F3F4FA] py-2 pt-8">
-                <div class="pl-3 flex items-center">
-                    <div class="border_left"></div>
-                    <p class=" text-[16px] pl-2">Bookmarked Questions</p>
-                </div>
+            <div class="bg-[#F3F4FA] py-2">
                 <template v-if="exam && exam.mcqs && exam.mcqs.length">
                     <div v-if="isActive">
                         <LazyMcqsPracticeExamExpension :items="exam.mcqs" />
@@ -141,17 +135,18 @@ const active = () => {
 }
 </script>
 <style scoped>
-.bg {
-    background-color: rgba(4, 86, 137, 0.2);
-}
-
 .active {
     background-color: white;
     border-radius: 10px;
 }
-.border_left{
+
+.border_left {
     background-color: blue;
     width: 4px;
     height: 10px;
+}
+
+.tab_bg {
+    background: rgba(4, 86, 137, 0.2);
 }
 </style>

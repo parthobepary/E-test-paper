@@ -1,6 +1,6 @@
 <template>
     <div class="px-2">
-        <div class="flex justify-between items-center text-[14px] border-2">
+        <div class="flex justify-between items-center text-[14px] border-t-2 border-l-2 border-r-2">
             <p class="w-[50%] border-r-4 pl-1">Exam Type</p>
             <p class="text-[#045D97] pl-2 text-left w-[50%]">{{ details.exam_type }}</p>
         </div>

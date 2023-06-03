@@ -3,28 +3,24 @@
         <div class="">
             <!-- exam header -->
             <div class="flex justify-center">
-                <h2 class="pt-10 pb-6">{{ exam.name }}</h2>
+                <h2 class="py-3 text-[18px]">{{ exam.name }}</h2>
             </div>
             <!-- timer -->
-            <div class="flex justify-between items-center pr-4">
+            <div v-if="!isSubmit" class="flex justify-between items-center pr-4 pb-2">
                 <div class="px-2 flex items-center">
                     <div class="border_left"></div>
-                    <p class=" text-[18px] pl-2">Remaining Time</p>
+                    <p class=" text-[13px] pl-2">Remaining Time</p>
                 </div>
-                <div class="flex justify-between pb-4">
+                <div class="flex justify-between">
                     <LazyMcqsExamTimer :validUntil="exam.details.valid_till" />
-                    <!-- <button class="ml-2 text-[12px] px-2 rounded-xl bg-[#045d97] py-0 text-white">Submit answer</button> -->
+                    <button @click="isSubmitAnswer" class="ml-2 text-[12px] px-2 rounded-md btn-submit text-white">Submit answer</button>
                 </div>
             </div>
             <!-- exam details -->
-            <div class="bg-[#F3F4FA] py-4 px-2 set_height">
-                <div class="flex items-center">
-                    <div class="border_left"></div>
-                    <p class=" text-[16px] pl-2">Questions : </p>
-                </div>
+            <div class="bg-[#F3F4FA] px-2 set_height">
                 <div>
                     <div v-if="!isSubmit">
-                        <LazyMcqsExamPerformExam @submit-answer="submitAnswer($event)" />
+                        <LazyMcqsExamPerformExam :isOpen="isOpen" @submit-answer="submitAnswer($event)" />
                     </div>
                     <div v-else>
                         <ExamAnalysis :exam="data" />
@@ -47,7 +43,7 @@ const data = {
   "positive_marks": 1,
   "negative_marks": 0,
   "start_time": "2023-05-30T07:29:36.000000Z",
-  "end_time": "2023-05-30T07:30:00.000000Z",
+  "end_time": "2023-06-T07:30:00.000000Z",
   "result_publish_time": "2023-05-30T07:31:00.000000Z",
   "question": {
     "id": 21,
@@ -70,7 +66,7 @@ const data = {
               "e": null,
               "answer": "d",
               "answer_image": null,
-              "explanation": "d"
+              "explanation": "We're going to look back into that earliest time to see the first galaxies that formed in the history of the universe,explained Space Telescope Science Institute astronomer Dan Coe, who specializes in the early universe."
             },
             {
               "id": 2,
@@ -224,12 +220,12 @@ const data = {
 
 
 const exam = ref({
-    name: 'MCQ exam',
+    name: 'Exam name',
     details: {
         exam_type: 'General Exam',
         exam_mode: 'Exam',
         exam_duration: '5',
-        valid_till: '2023-05-30 10-0100',// its have a valid date time format
+        valid_till: '2023-06-03 12-0100',// its have a valid date time format
         per_question_mark: '1.00',
         negative_mark: '0.00',
         exam_start_time: 'Nov 4, 2022 8:22 PM',
@@ -331,24 +327,28 @@ const exam = ref({
 });
 
 const isSubmit = ref(false);
+const isOpen = ref(false);
 const submitAnswer = (evn) => {
     isSubmit.value = evn
 }
+
+const isSubmitAnswer = () => {
+  isOpen.value = true
+}
 </script>
 <style scoped>
-.border_left {
-    background-color: blue;
-    width: 4px;
-    height: 10px;
-}
 
 .set_height {
     height: calc(100vh - 100px);
 }
 
 .border_left {
-    background-color: blue;
+  background: linear-gradient(102.17deg, #045689 0.04%, #0381E0 100%);
     width: 4px;
     height: 10px;
+}
+
+.btn-submit{
+  background: linear-gradient(102.17deg, #045689 0.04%, #0381E0 100%);
 }
 </style>
