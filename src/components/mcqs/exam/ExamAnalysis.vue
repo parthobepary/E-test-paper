@@ -34,6 +34,7 @@
           <div class="flex justify-center py-2" v-if="question.question_image">
             <img class="w-[80%] md:w-[60%] rounded-md" :src="question.question_image" alt="" />
           </div>
+
           <div v-for="(option, index) in ['a', 'b', 'c', 'd', 'e']" :key="index"
             :class="checkAnswer(section.title, question, option)" class="option">
             <div class="flex justify-between items-center pr-2">
@@ -101,9 +102,9 @@ const setIcon = (section_title, question, option) => {
       "</svg>" : "";
   }
   return option === question.answer
-    ? "<svg width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
+    ? option === answer.user_answer ? "<svg width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
     "<path d=\"M10 20.0009C4.48 19.9949 0.006 15.5209 0 10.0009V9.80088C0.11 4.30588 4.635 -0.0711243 10.13 0.000875677C15.627 0.0748757 20.034 4.56988 19.998 10.0659C19.962 15.5629 15.497 20.0009 10 20.0009ZM5.41 9.59088L4 11.0009L8 15.0009L16 7.00088L14.59 5.58088L8 12.1709L5.41 9.59088Z\" fill=\"#14AE5C\"/>\n" +
-    "</svg>"
+    "</svg>" : ''
     : option === answer.user_answer
       ? "<svg width=\"21\" height=\"22\" viewBox=\"0 0 21 22\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
       "<path d=\"M18.0996 3.89961C14.1996 -0.000390567 7.79961 -0.000390567 3.89961 3.89961C-0.000390676 7.79961 -0.000390676 14.1996 3.89961 18.0996C7.79961 21.9996 14.0996 21.9996 17.9996 18.0996C21.8996 14.1996 21.9996 7.79961 18.0996 3.89961ZM13.7996 15.1996L10.9996 12.3996L8.19961 15.1996L6.79961 13.7996L9.59961 10.9996L6.79961 8.19961L8.19961 6.79961L10.9996 9.59961L13.7996 6.79961L15.1996 8.19961L12.3996 10.9996L15.1996 13.7996L13.7996 15.1996Z\" fill=\"#FF0000\"/>\n" +
@@ -114,6 +115,39 @@ const setIcon = (section_title, question, option) => {
 <style  scoped>
 .explanation {
   background-color: rgba(247, 148, 29, 0.15);
+}
+
+
+.explanation {
+  background-color: rgba(247, 148, 29, 0.15);
+}
+
+.option {
+  background-color: white;
+  font-size: 18px;
+  border-radius: 10px;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.selected-answer {
+  background-color: #E5FFF1 !important;
+  border-radius: 5px;
+}
+
+.correct-answer {
+  background-color: #E5FFF1 !important;
+  border-radius: 5px;
+}
+
+.wrong-answer {
+  background-color: #FFE8E3 !important;
+  border-radius: 5px;
+}
+
+.not-answered {
+  background-color: #E0FFE7 !important;
+  border-radius: 5px;
 }
 
 .option {

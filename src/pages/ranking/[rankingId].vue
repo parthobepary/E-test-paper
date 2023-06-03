@@ -1,5 +1,5 @@
 <template>
-  <div class="pt-2">
+  <div class="pt-6">
     <div class="container mx-auto px-2 flex justify-center">
       <div v-if="isLoading">
         <CommonShareLoader />
@@ -12,7 +12,7 @@
             <div>
               <img src="../../public/images/rank/2r.png" alt="">
             </div>
-            <div>
+            <div class="mt-[-20px]">
               <img src="../../public/images/rank/1r.png" alt="">
             </div>
             <div>
@@ -20,7 +20,7 @@
             </div>
           </div>
           <!-- all rankin -->
-          <div v-if="fakeRank && fakeRank.length >= 3" class="bg-[#F6F8FC] my-4 rounded-md">
+          <div v-if="fakeRank && fakeRank.length >= 3" class="bg-[#F6F8FC] rounded-md">
             <div v-for="(rank, i) in fakeRank.slice(3)" :key="i">
               <div :class="rank?.user?.user_id == 1 ? 'border-2 border-blue-500' : 'bg-white'"
                 class="rounded-md my-2 flex justify-between items-center px-2">
