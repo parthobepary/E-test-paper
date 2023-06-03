@@ -13,7 +13,7 @@
                 </div>
                 <div class="flex justify-between">
                     <LazyMcqsExamTimer :validUntil="exam.details.valid_till" />
-                    <button @click="isSubmitAnswer" class="ml-2 text-[12px] px-2 rounded-md btn-submit text-white">Submit answer</button>
+                    <button @click="isSubmitAnswer" class="ml-2 text-[12px] px-2 rounded-md btn-submit text-white">সাবমিট করুন</button>
                 </div>
             </div>
             <!-- exam details -->

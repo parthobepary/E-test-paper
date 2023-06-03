@@ -55,10 +55,15 @@
                 leave-to="opacity-0 scale-95">
                 <DialogPanel
                   class="w-full pt-3 md:w-[30%] transform overflow-hidden rounded-2xl bg-white text-left align-middle shadow-xl transition-all">
-                  <DialogTitle as="h3" class="pt-6 text-lg font-medium leading-6 text-center">
+                  <DialogTitle as="h3" class="pt-6 px-6 text-lg font-medium leading-6 text-center">
                     <p class="">
                       Are you sure to finish in the exam?
                     </p>
+                    <div class="mt-6 px-5">
+                        <ul v-for="(it, i) in fakedata" :key="i">
+                          <li class="text-[14px]">{{ it }}</li>
+                        </ul>
+                      </div>
                   </DialogTitle>
 
                   <div class="mt-8 flex justify-center">
@@ -99,7 +104,12 @@ const props = defineProps({
     type: Boolean,
     default: false
   }
-})
+});
+
+const fakedata = [
+    "Ensure uninterrupted internet .",
+    "After participating in the exam",
+];
 
 const selected = ref('')
 const emit = defineEmits(['submitAnswer'])
@@ -142,6 +152,10 @@ const confirmModal = () => {
   background: linear-gradient(102.17deg, #045689 0.04%, #0381E0 100%);
   width: 4px;
   height: 10px;
+}
+
+li {
+    list-style: disc;
 }
 </style>
   

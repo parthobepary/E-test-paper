@@ -22,36 +22,36 @@
           <!-- all rankin -->
           <div v-if="fakeRank && fakeRank.length >= 3" class="bg-[#F6F8FC] rounded-md">
             <div v-for="(rank, i) in fakeRank.slice(3)" :key="i">
-              <div :class="rank?.user?.user_id == 1 ? 'border-2 border-blue-500' : 'bg-white'"
+              <div :class="rank?.user?.user_id == 1 ? 'border-2 border-blue-500 bg-[#E9F8FF]' : 'bg-white'"
                 class="rounded-md my-2 flex justify-between items-center px-2">
                 <div class="w-10 h-10 bg-[#E4EFFF] text-[#045C96] text-[14px] flex justify-center items-center rounded-lg">
                   {{ i + 4 }}
                 </div>
                 <div class="w-[50%] text-left">
                   <p class="text-[14px] leading-none">{{ rank.name }}</p>
-                  <p class="text-[14px] first-line:leading-none pt-2">{{ rank.institution }}</p>
+                  <p class="text-[12px] text-gray-600 first-line:leading-none pt-2">{{ rank.institution }}</p>
                 </div>
-                <div>
-                  <div class="flex gap-2 py-0">
+                <div class=" my-[-5px]">
+                  <div class="flex">
                     <p class="text-center text-[14px]">
-                      <Icon color="red"
-                        name="streamline:interface-lighting-light-bulb-lighting-light-incandescent-bulb-lights" />
-                    </p>
-                    <p class="text-[14px]">{{ rank.marks }}</p>
-                  </div>
-                  <div class="flex gap-2 py-0">
-                    <p class="text-center text-[14px] py-0">
                       <Icon color="blue"
                         name="streamline:interface-time-clock-circle-clock-loading-measure-time-circle" />
+                        {{ rank.duration }}
                     </p>
-                    <p class="text-[14px] py-0">{{ rank.duration }} sec</p>
+                  </div>
+                  <div class="flex">
+                    <p class="text-center text-[14px]">
+                      <Icon color="#FFC200"
+                        name="streamline:interface-lighting-light-bulb-lighting-light-incandescent-bulb-lights" />
+                        {{ rank.marks }}
+                    </p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
           <div> 
-            <button class="bg-[#045C96] text-white rounded-md mt-2 text-[16px] text-center w-full">Go back to chapter</button>
+            <button class="bg-[#045C96] text-white py-1 rounded-md mt-2 text-[16px] text-center w-full">Back to chapter</button>
           </div>
         </div>
       </div>

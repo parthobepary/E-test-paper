@@ -9,7 +9,7 @@
             <div class="bg-[#F3F4FA] py-4 set_height">
                 <McqsExamDetails :details="exam.details" />
                 <div class="absolute bottom-0 pb-10 w-full text-center">
-                    <button @click="startExam" class=" text-center btn-bg text-white px-8 py-1 rounded-lg">Participate Exam</button>
+                    <button @click="startExam" class="mb-4 text-[16px] w-[80%] text-center btn-bg text-white px-8 py-1 rounded-lg">Participate Exam</button>
                     <McqsExamConfirmModal @close-modal="closeModal($event)" :is-open="isModal"/>
                 </div>
             </div>

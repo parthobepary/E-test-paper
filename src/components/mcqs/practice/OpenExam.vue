@@ -14,22 +14,25 @@
                         <div :class="showDesBtn ? 'hidden' : 'block'" v-for="option, ind in mcq.options">
                             <button @click="submitAnswer()" :class="getDigit(ind).split(' ')[0] == mcq.ans ? 'bg-[#DDF5FF] border-2 border-[#008FCA]': 'bg-[#F3F4FA]'" class="w-full px-3 text-[16px] rounded-md mb-2 flex justify-between">
                                 <p><small>{{ getDigit(ind) }} <span>{{ option }}</span></small></p>
-                                <p v-if="getDigit(ind).split(' ')[0] == mcq.ans"><Icon color="#31CB18" name="heroicons-solid:check-circle"/></p>
+                                <p v-if="getDigit(ind).split(' ')[0] == mcq.ans"><Icon size="25" color="#31CB18" name="heroicons-solid:check-circle"/></p>
                             </button>
                         </div>
                         <div :class="!showDesBtn ? 'hidden' : 'block'" v-for="option, ind in mcq.options">
                             <button @click="submitAnswer()" :class="getDigit(ind).split(' ')[0] == mcq.ans ? 'bg-[#DDF5FF] border-2 border-[#008FCA]': 'bg-[#F3F4FA]'" class="w-full px-3 text-[16px] rounded-md mb-2 flex justify-between">
                                 <p><small>{{ getDigit(ind) }} <span>{{ option }}</span></small></p>
-                                <p v-if="getDigit(ind).split(' ')[0] == mcq.ans"><Icon color="#31CB18" name="heroicons-solid:check-circle"/></p>
+                                <p v-if="getDigit(ind).split(' ')[0] == mcq.ans"><Icon size="25" color="#31CB18" name="heroicons-solid:check-circle"/></p>
                             </button>
                         </div>
                     </template>
                     <template v-if="mcq?.description && mcq.description.length && showDesBtn">
-                        <div class="flex justify-center py-3">
-                            <button @click="showExplain" class="text-[15px] px-4 btn_border rounded-md text-[#045689]">See Explanation</button>
+                        <div v-if="!isShowExplain" class="flex justify-center py-3">
+                            <button @click="showExplain" class="text-[15px] px-4 btn_border rounded-xl text-[#045689]">See Explanation</button>
                         </div>
                         <div v-if="isShowExplain"  class="bg-[#FDEAD2] px-3 rounded-md py-3">
                             <p><small class="text-[14px] leading-tight"><span class="text-[#5287A5]">Explanation : </span>{{ mcq.description }}</small></p>
+                        </div>
+                        <div v-if="isShowExplain"  class="flex justify-center py-3">
+                            <button @click="hideExplain" class="text-[15px] px-4 btn_border rounded-xl text-[#045689]">Hide Explanation</button>
                         </div>
                     </template>
                 </div>
@@ -63,6 +66,10 @@ const openSutter = (i) => {
         showDesBtn.value = false;
     }
 };
+const hideExplain = () => {
+    isShowExplain.value = !isShowExplain.value;
+};
+
 const getDigit = (i) => {
     if (i == 0) return 'a . ';
     else if (i == 1) return 'b . ';
