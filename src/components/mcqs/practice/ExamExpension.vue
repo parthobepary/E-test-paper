@@ -3,22 +3,28 @@
        <div class="">
         <div v-for="(mcq, i) in items" :key="i">
             <div class="my-2 rounded-2xl w-full bg-white">
-                <div @click="openSutter(i)" class="flex justify-between items-center cursor-pointer px-4 pb-3 pt-4">
+                <div @click="openSutter(i)" class="flex justify-between items-center cursor-pointer px-4 pb-3 pt-4 transition-all">
                     <p class="text-[14px]"> {{ i + 1 }} . {{ mcq.mcq }}</p>
-                    <p class="text-[14px]">
+                    <p class="text-[14px] transition-all">
                         <Icon color="#0072BB" :name="targetClick == i ? 'ion:ios-arrow-up' : 'ion:chevron-down'"></Icon>
                     </p>
                 </div>
                 <div v-if="isOpen && targetClick === i" class="px-2 pb-3">
                     <template v-if="mcq.options && mcq.options.length">
-                        <div v-for="option, ind in mcq.options">
-                            <div :class="getDigit(ind).split(' ')[0] == mcq.ans ? 'bg-[#DDF5FF] border': 'bg-[#F3F4FA]'" class="px-3 text-[16px] rounded-lg mb-2 flex justify-between">
+                        <div :class="showDesBtn ? 'hidden' : 'block'" v-for="option, ind in mcq.options">
+                            <button @click="submitAnswer(getDigit(ind), mcq.ans)" class="bg-[#F3F4FA] w-full px-3 text-[16px] rounded-lg mb-2 flex justify-between">
+                                <p><small>{{ getDigit(ind) }} <span>{{ option }}</span></small></p>
+                                <p v-if="option == mcq.ans"><Icon color="blue" name="heroicons-solid:check-circle"/></p>
+                            </button>
+                        </div>
+                        <div :class="!showDesBtn ? 'hidden' : 'block'" v-for="option, ind in mcq.options">
+                            <button @click="submitAnswer()" :class="getDigit(ind).split(' ')[0] == mcq.ans ? 'bg-[#DDF5FF] border': 'bg-[#F3F4FA]'" class="bg-[#F3F4FA] w-full px-3 text-[16px] rounded-lg mb-2 flex justify-between">
                                 <p><small>{{ getDigit(ind) }} <span>{{ option }}</span></small></p>
                                 <p v-if="getDigit(ind).split(' ')[0] == mcq.ans"><Icon color="blue" name="heroicons-solid:check-circle"/></p>
-                            </div>
+                            </button>
                         </div>
                     </template>
-                    <template v-if="mcq?.description && mcq.description.length">
+                    <template v-if="mcq?.description && mcq.description.length && showDesBtn">
                         <div class="flex justify-center py-3">
                             <button @click="showExplain" class="text-[15px] px-4 btn_border rounded-2xl text-[#81AAC4]">See Explanation</button>
                         </div>
@@ -40,17 +46,21 @@ const props = defineProps({
         default: []
     }
 });
+const isCorrect = ref(false)
 const isShowExplain = ref(false);
 const isOpen = ref(false);
+const showDesBtn = ref(false);
 const targetClick = ref(-1);
 const openSutter = (i) => {
     if (i === targetClick.value) {
         targetClick.value = -1;
         isOpen.value = !isOpen.value;
+        showDesBtn.value = false;
     }
     else {
         targetClick.value = i;
         isOpen.value = true;
+        showDesBtn.value = false;
     }
 };
 const getDigit = (i) => {
@@ -61,6 +71,9 @@ const getDigit = (i) => {
 };
 const showExplain = () => {
     isShowExplain.value = !isShowExplain.value;
+};
+const submitAnswer = () => {
+    showDesBtn.value = true
 }
 
 </script>

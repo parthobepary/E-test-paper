@@ -19,13 +19,13 @@
                     <div class="w-full">
                       <div class="">
                         <div class="text-sm">
-                          <RadioGroupLabel as="p" :class="checked ? 'text-black' : 'text-gray-900'" class="text-[14px]">{{ item }}
+                          <RadioGroupLabel as="p" :class="checked ? 'text-black' : 'text-gray-900'" class="text-[14px]"> {{ getDigit(i)}} {{ item }}
                           </RadioGroupLabel>
                         </div>
                       </div>
                     </div>
                   </div>
-                </RadioGroupOption>
+                </RadioGroupOption> 
               </div>
             </RadioGroup>
           </div>
@@ -103,7 +103,7 @@ const isOpen = ref(false)
 const exam = ref({
   mcq: [
     {
-      name: 'Test exam',
+      name: 'What is exam ?',
       questions: [
         "What is your name ?", "what is your father name ?", "What is your mother name ?"
       ]
@@ -112,6 +112,12 @@ const exam = ref({
   ]
 });
 
+const getDigit = (i) => {
+    if (i == 0) return 'a . ';
+    else if (i == 1) return 'b . ';
+    else if (i == 2) return 'c . ';
+    else return 'd . '
+};
 const finishPracticeExam = () => {
   isOpen.value = true;
 };

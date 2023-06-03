@@ -48,9 +48,9 @@ const props = defineProps({
 });
 const isCorrect = ref(false)
 const isShowExplain = ref(false);
-const isOpen = ref(false);
+const isOpen = ref(true);
 const showDesBtn = ref(false);
-const targetClick = ref(-1);
+const targetClick = ref(0);
 const openSutter = (i) => {
     if (i === targetClick.value) {
         targetClick.value = -1;

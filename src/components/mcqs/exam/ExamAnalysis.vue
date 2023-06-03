@@ -30,7 +30,7 @@
               </div>
             </div>
             <div class="explanation p-4 rounded-md mb-3" v-if="question.explanation"> 
-              <p><span class="text-[#079F95]">Explanation: </span>{{ question.explanation }}</p>
+              <p><span class="text-[#079F95] text-[14px]">Explanation: </span>{{ question.explanation }}</p>
               <div class="py-4 flex justify-center">
                 <img :src="question.answer_image" alt="">
               </div>

@@ -6,10 +6,10 @@
                 <h2 class="pt-10 pb-6">{{ exam.name }}</h2>
             </div>
             <!-- exam details -->
-            <div class="bg-[#F3F4FA] py-4 px-2 set_height">
+            <div class="bg-[#F3F4FA] py-4 set_height">
                 <McqsExamDetails :details="exam.details" />
                 <div class="absolute bottom-0 pb-10 w-full text-center">
-                    <button @click="startExam" class=" text-center bg-[#045D97] text-white px-4 py-1 rounded-lg">Participate Exam</button>
+                    <button @click="startExam" class=" text-center bg-[#045D97] text-white px-8 py-1 rounded-lg">Participate Exam</button>
                     <McqsExamConfirmModal @close-modal="closeModal($event)" :is-open="isModal"/>
                 </div>
             </div>
