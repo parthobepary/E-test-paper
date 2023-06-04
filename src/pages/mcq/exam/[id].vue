@@ -17,7 +17,7 @@
                 </div>
             </div>
             <!-- exam details -->
-            <div class="bg-[#F3F4FA] px-2 set_height">
+            <div class="px-2 set_height">
                 <div>
                     <div v-if="!isSubmit">
                         <LazyMcqsExamPerformExam :question="mcqs" :isOpen="isOpen" @submit-answer="submitAnswer($event)" />
@@ -342,7 +342,7 @@ const init = async() => {
     }
     isLoading.value = false;
 }
-init()
+init();
 
 
 // mcqs get from api end
