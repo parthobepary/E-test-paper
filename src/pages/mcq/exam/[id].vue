@@ -20,7 +20,7 @@
             <div class="bg-[#F3F4FA] px-2 set_height">
                 <div>
                     <div v-if="!isSubmit">
-                        <LazyMcqsExamPerformExam :isOpen="isOpen" @submit-answer="submitAnswer($event)" />
+                        <LazyMcqsExamPerformExam :question="mcqs" :isOpen="isOpen" @submit-answer="submitAnswer($event)" />
                     </div>
                     <div v-else>
                         <ExamAnalysis :exam="data" />
@@ -325,6 +325,27 @@ const exam = ref({
         }
     ]
 });
+
+// mcqs get from api start
+
+const isLoading = ref(false);
+const mcqs = ref([]);
+
+const init = async() => {
+    isLoading.value = true;
+    const { data, pending, error } = await useFetch('https://api.e-testpaper.com/api/boards/5/question/2019/?subject_id=6472f5568fc601e99af005b5&type=mcq&fbclid=IwAR2fK4_9_VbnIxRpIRUDb3c9_aTkj1mjGXlxkeUO6MoFaOqmotx2vgE9YbQ')
+    if(error && error._value){
+        console.log(error);
+    }else{
+        // console.log(data.value);
+        mcqs.value = data.value.questions
+    }
+    isLoading.value = false;
+}
+init()
+
+
+// mcqs get from api end
 
 const isSubmit = ref(false);
 const isOpen = ref(false);

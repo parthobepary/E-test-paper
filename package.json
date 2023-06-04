@@ -19,6 +19,8 @@
   "dependencies": {
     "nuxt-headlessui": "^1.1.4",
     "moment": "^2.29.4",
-    "@nuxtjs/moment": "^1.6.1"
+    "@nuxtjs/moment": "^1.6.1",
+    "katex": "^0.16.4",
+    "katex-vue3": "^0.0.6"
   }
 }

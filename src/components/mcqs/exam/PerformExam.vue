@@ -5,15 +5,19 @@
         <div class="border_left"></div>
         <p class=" text-[16px] pl-2">Questions : </p>
       </div>
-      <template v-if="exam.mcq && exam.mcq.length">
-        <div v-for="item, i in exam.mcq" :key="i">
-          <p class="text-[18px]">{{ i + 1 + ' . ' + item.name }}</p>
-          <!-- exam option -->
+      <template v-if="question && question.length">
+        <div v-for="item, i in question" :key="i">
+          <p class="text-[18px]">{{ i + 1 + '.' }} <span v-katex:auto v-html="item.question" class="latex"> </span></p>
+
+
+          <!-- <div v-katex:auto v-html="item.question"></div> -->
+
+
           <div class="pl-1">
             <RadioGroup v-model="selected">
               <RadioGroupLabel class="sr-only">Server size</RadioGroupLabel>
               <div class="space-y-2">
-                <RadioGroupOption as="template" v-for="(item, i) in item.questions" :key="i" :value="item"
+                <RadioGroupOption as="template" v-for="(item, i) in item.options" :key="i" :value="item"
                   v-slot="{ active, checked }">
                   <div :class="[
                     active
@@ -24,7 +28,7 @@
                       <div class="">
                         <div class="text-sm pl-2">
                           <RadioGroupLabel as="p" :class="checked ? 'text-black' : 'text-gray-900'" class="text-[14px]">
-                            {{ getDigit(i) }} {{ item }}
+                            {{ getDigit(i) }} <span v-katex="item" class="latex"></span>
                           </RadioGroupLabel>
                         </div>
                       </div>
@@ -36,6 +40,7 @@
           </div>
         </div>
       </template>
+
     </div>
 
     <!-- exam finished modal -->
@@ -103,6 +108,10 @@ const props = defineProps({
   isOpen: {
     type: Boolean,
     default: false
+  },
+  question:{
+    type: Array,
+    default:[]
   }
 });
 
@@ -111,20 +120,13 @@ const fakedata = [
     "After participating in the exam",
 ];
 
+// api data
+
+
+
+
 const selected = ref('')
 const emit = defineEmits(['submitAnswer'])
-
-const exam = ref({
-  mcq: [
-    {
-      name: 'What is exam ?',
-      questions: [
-        "What is your name ?", "what is your father name ?", "What is your mother name ?"
-      ]
-    }
-
-  ]
-});
 
 const getDigit = (i) => {
   if (i == 0) return 'a . ';
