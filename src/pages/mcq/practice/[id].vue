@@ -15,117 +15,57 @@
                 </div>
             </div>
             <!-- mcq -->
-            <div class="bg-[#F3F4FA] py-2">
-                <template v-if="exam && exam.mcqs && exam.mcqs.length">
-                    <div v-if="isActive">
-                        <LazyMcqsPracticeExamExpension :items="exam.mcqs" />
-                    </div>
-                    <div v-else>
-                        <LazyMcqsPracticeOpenExam :items="exam.mcqs" />
-                    </div>
-                </template>
+            <div>
+                <div v-if="isLoading" class="flex justify-center items-center h-screen">
+                    <p>Loading....</p>
+                </div>
+                <div v-else class="bg-[#F3F4FA] py-2">
+                    <template v-if="mcqs && mcqs.length">
+                        <div v-if="isActive">
+                            <LazyMcqsPracticeExamExpension :items="mcqs" />
+                        </div>
+                        <div v-else>
+                            <LazyMcqsPracticeOpenExam :items="mcqs" />
+                        </div>
+                    </template>
+                </div>
             </div>
         </div>
     </div>
 </template>
 <script setup>
-const exam = ref({
-    name: 'MCQ Practice',
-    mcqs: [
-        {
-            mcq: 'What is the name of our country ?',
-            options: ['India', 'Bangladesh', 'Pakistan', 'Uganda'],
-            ans: 'a',
-            description: 're going to look back into that earliest time to see the first galaxies that formed in the history of the universe, explained Space Telescope Science Institute astronomer Dan Coe, who specializes in the early universe.',
-            img: ''
-        },
-        {
-            mcq: 'What is your name ?',
-            options: ['Anik dash', 'Partho bepary', 'Pro devs'],
-            ans: 'b',
-            description: 're going to look back into that earliest time to see the first galaxies that formed in the history of the universe, explained Space Telescope Science Institute astronomer Dan Coe, who specializes in the early universe.',
-            img: ''
-        },
-        {
-            mcq: 'What is your name ?',
-            options: ['Anik dash', 'Partho bepary', 'Pro devs'],
-            ans: 'b',
-            description: 're going to look back into that earliest time to see the first galaxies that formed in the history of the universe, explained Space Telescope Science Institute astronomer Dan Coe, who specializes in the early universe.',
-            img: ''
-        },
-        {
-            mcq: 'What is your name ?',
-            options: ['Anik dash', 'Partho bepary', 'Pro devs'],
-            ans: 'c',
-            description: 're going to look back into that earliest time to see the first galaxies that formed in the history of the universe, explained Space Telescope Science Institute astronomer Dan Coe, who specializes in the early universe.',
-            img: 'https://cdn.entrance360.com/media/uploads/2019/07/23/download-3.png'
-        },
-        {
-            mcq: 'What is your name ?',
-            options: ['Anik dash', 'Partho bepary', 'Pro devs'],
-            ans: 'b',
-            description: 're going to look back into that earliest time to see the first galaxies that formed in the history of the universe, explained Space Telescope Science Institute astronomer Dan Coe, who specializes in the early universe.',
-            img: 'Pro devs'
-        },
-        {
-            mcq: 'What is your name ?',
-            options: ['Anik dash', 'Partho bepary', 'Pro devs'],
-            ans: 'a',
-            description: 're going to look back into that earliest time to see the first galaxies that formed in the history of the universe, explained Space Telescope Science Institute astronomer Dan Coe, who specializes in the early universe.',
-            img: ''
-        },
-        {
-            mcq: 'What is your name ?',
-            options: ['Anik dash', 'Partho bepary', 'Pro devs'],
-            ans: 'b',
-            description: 're going to look back into that earliest time to see the first galaxies that formed in the history of the universe, explained Space Telescope Science Institute astronomer Dan Coe, who specializes in the early universe.',
-            img: ''
-        },
-        {
-            mcq: 'What is your name ?',
-            options: ['Anik dash', 'Partho bepary', 'Pro devs'],
-            ans: 'd',
-            description: 're going to look back into that earliest time to see the first galaxies that formed in the history of the universe, explained Space Telescope Science Institute astronomer Dan Coe, who specializes in the early universe.',
-            img: 'https://cdn.entrance360.com/media/uploads/2019/07/23/download-3.png'
-        },
-        {
-            mcq: 'What is your name ?',
-            options: ['Anik dash', 'Partho bepary', 'Pro devs'],
-            ans: 'b',
-            description: 're going to look back into that earliest time to see the first galaxies that formed in the history of the universe, explained Space Telescope Science Institute astronomer Dan Coe, who specializes in the early universe.',
-            img: ''
-        },
-        {
-            mcq: 'What is your name ?',
-            options: ['Anik dash', 'Partho bepary', 'Pro devs'],
-            ans: 'a',
-            description: 're going to look back into that earliest time to see the first galaxies that formed in the history of the universe, explained Space Telescope Science Institute astronomer Dan Coe, who specializes in the early universe.',
-            img: ''
-        },
-        {
-            mcq: 'What is your name ?',
-            options: ['Anik dash', 'Partho bepary', 'Pro devs'],
-            ans: 'c',
-            description: 're going to look back into that earliest time to see the first galaxies that formed in the history of the universe, explained Space Telescope Science Institute astronomer Dan Coe, who specializes in the early universe.',
-            img: ''
-        },
-        {
-            mcq: 'What is your name ?',
-            options: ['Anik dash', 'Partho bepary', 'Pro devs'],
-            ans: 'b',
-            description: 're going to look back into that earliest time to see the first galaxies that formed in the history of the universe, explained Space Telescope Science Institute astronomer Dan Coe, who specializes in the early universe.',
-            img: ''
-        },
-        {
-            mcq: 'What is your name ?',
-            options: ['Anik dash', 'Partho bepary', 'Pro devs'],
-            ans: 'd',
-            description: 're going to look back into that earliest time to see the first galaxies that formed in the history of the universe, explained Space Telescope Science Institute astronomer Dan Coe, who specializes in the early universe.',
-            img: ''
-        }
-    ]
-});
-const isActive = ref(true)
+
+const mcqs = ref([])
+
+
+const isActive = ref(true);
+
+
+const route = useRoute();
+const topic_id = route?.query.topic;
+const fbcl_id = route?.query.fbclid;
+
+// console.log(topic_id, fbcl_id);
+
+// 64798aa4330fd9518a1783df
+//IwAR3s43hdmzd3ByT7Y59ZHeQXBICSFlfbtZDKgPIHwP8dKEl_Ek_TM3tkgo4
+
+
+
+const isLoading = ref(false);
+
+const init = async () => {
+    isLoading.value = true;
+    const { data, pending, error } = await useFetch(`https://api.e-testpaper.com/api/mcq?topic=${topic_id}&fbclid=${fbcl_id}`)
+    if (error && error._value) {
+        console.log(error);
+    } else {
+        // console.log(data.value);
+        mcqs.value = data.value.mcqs
+    }
+    isLoading.value = false;
+}
+init();
 
 const inActive = () => {
     isActive.value = false
