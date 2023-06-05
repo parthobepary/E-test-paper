@@ -5,7 +5,7 @@
           <div class="mb-2 rounded-md w-full bg-white">
             <div @click="openSutter(i)"
               class="flex justify-between items-center cursor-pointer px-4 py-[4px] transition-all">
-              <p class="text-[18px]">{{ i + 1 + '.' }} <span v-katex:auto v-html="removeP(mcqs.question)" class="latex">
+              <p class="text-[18px]">{{ i + 1 + '.' }} <span v-katex="removeP(mcqs.question)" class="latex">
                 </span></p>
               <p class="text-[14px] transition-all">
                 <Icon color="#0462A1" :name="targetClick == i ? 'ion:ios-arrow-up' : 'ion:chevron-down'"></Icon>
@@ -18,7 +18,7 @@
                   <button
                     :class="mcqs.answer == option ? 'bg-[#DDF5FF] border-2 border-[#008FCA]' : 'bg-[#F3F4FA]'"
                     class="w-full px-3 text-[16px] rounded-md mb-2 flex justify-between">
-                    <p><small>{{ getDigit(ind) }} <span>{{ option }}</span></small></p>
+                    <p><small>{{ getDigit(ind) }} <span v-katex="option"></span></small></p>
                     <p v-if="mcqs.answer == option ">
                       <Icon size="25" color="#31CB18" name="heroicons-solid:check-circle" />
                     </p>

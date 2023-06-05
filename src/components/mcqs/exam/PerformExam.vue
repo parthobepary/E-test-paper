@@ -7,7 +7,7 @@
       </div>
       <template v-if="question && question.length">
         <div v-for="item, i in question" :key="i">
-          <p class="text-[18px]">{{ i + 1 + '.' }} <span v-katex:auto v-html="item.question" class="latex"> </span></p>
+          <p class="text-[18px]">{{ i + 1 + '.' }} <span v-katex="removeP(item.question)" class="latex"> </span></p>
 
 
           <!-- <div v-katex:auto v-html="item.question"></div> -->
@@ -133,6 +133,11 @@ const getDigit = (i) => {
   else if (i == 1) return 'b . ';
   else if (i == 2) return 'c . ';
   else return 'd . '
+};
+
+const removeP = (item) => {
+    let pera = item.replace("p", "span")
+    return pera
 };
 
 const closeModal = () => {
