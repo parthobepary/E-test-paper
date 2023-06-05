@@ -13,14 +13,22 @@
           </div>
           <div v-if="isOpen && targetClick === i" class="px-2 pb-3">
             <template v-if="mcqs.options && mcqs.options.length">
-              <div :class="showDesBtn ? 'hidden' : 'block'" v-for="option, ind in mcqs.options">
+              <div v-if="!showCorrectAns" v-for="option, ind in mcqs.options">
                 <!-- {{ option }} -->
-                <button
-                  :class="mcqs.answer == option ? 'bg-[#DDF5FF] border-2 border-[#008FCA]' : 'bg-[#F3F4FA]'"
-                  class="w-full px-3 text-[16px] rounded-md mb-2 flex justify-between">
+                <button @click="submitAnswer(option)"
+                  class="bg-[#F3F4FA] w-full px-3 text-[16px] rounded-md mb-2 flex justify-between">
                   <p><small>{{ getDigit(ind) }} <span v-katex="option"></span></small></p>
-                  <p v-if="mcqs.answer == option ">
+                </button>
+              </div>
+              <div v-if="showCorrectAns" v-for="option, ind in mcqs.options">
+                <button :class="mcqs.answer == option ? 'bg-[#DDF5FF] border-2 border-[#008FCA]' : userAnswer == option ? 'bg-red-200':'bg-[#F3F4FA]'"
+                  class="w-full px-3 text-[16px] rounded-md mb-2 flex justify-between">
+                  <p><small>{{ getDigit(ind) }}<span v-katex="option"></span></small></p>
+                  <p v-if="mcqs.answer == option">
                     <Icon size="25" color="#31CB18" name="heroicons-solid:check-circle" />
+                  </p>
+                  <p v-if="userAnswer == option && mcqs.answer != option">
+                    <Icon  size="25" color="red" name="ic:baseline-cancel" />
                   </p>
                 </button>
               </div>
@@ -31,7 +39,8 @@
                   Explanation</button>
               </div>
               <div v-if="isShowExplain" class="bg-[#FDEAD2] px-3 rounded-md py-3">
-                <p><small class="text-[14px] leading-tight"><span class="text-[#5287A5]">Explanation :  <span v:katex="mcqs.explain"></span></span></small></p>
+                <p><small class="text-[14px] leading-tight"><span class="text-[#5287A5]">Explanation : <span
+                        v:katex="mcqs.explain"></span></span></small></p>
               </div>
               <div v-if="isShowExplain" class="flex justify-center py-3">
                 <button @click="hideExplain" class="text-[15px] px-4 btn_border rounded-xl text-[#045689]">Hide
@@ -52,7 +61,8 @@ const props = defineProps({
     default: []
   }
 });
-const isCorrect = ref(false)
+const showCorrectAns = ref(false)
+const userAnswer = ref('')
 const isShowExplain = ref(false);
 const isOpen = ref(false);
 const showDesBtn = ref(false);
@@ -62,11 +72,15 @@ const openSutter = (i) => {
     targetClick.value = -1;
     isOpen.value = !isOpen.value;
     showDesBtn.value = false;
+    showCorrectAns.value = false
+    userAnswer.value = ''
   }
   else {
     targetClick.value = i;
     isOpen.value = true;
+    showCorrectAns.value = false
     showDesBtn.value = false;
+    userAnswer.value = ''
   }
 };
 
@@ -87,8 +101,9 @@ const getDigit = (i) => {
 const showExplain = () => {
   isShowExplain.value = !isShowExplain.value;
 };
-const submitAnswer = () => {
-  showDesBtn.value = true
+const submitAnswer = (option) => {
+  showCorrectAns.value = true
+  userAnswer.value = option;
 }
 
 </script>
@@ -99,6 +114,7 @@ const submitAnswer = () => {
 
 .btn_border {
   border: 1px solid #81AAC4;
-}</style>
+}
+</style>
 
 <!-- https://icones.js.org/ -->
