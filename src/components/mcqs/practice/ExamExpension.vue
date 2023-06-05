@@ -31,8 +31,7 @@
                   Explanation</button>
               </div>
               <div v-if="isShowExplain" class="bg-[#FDEAD2] px-3 rounded-md py-3">
-                <p><small class="text-[14px] leading-tight"><span class="text-[#5287A5]">Explanation : </span>{{
-                  mcqs.explain }}</small></p>
+                <p><small class="text-[14px] leading-tight"><span class="text-[#5287A5]">Explanation :  <span v:katex="mcqs.explain"></span></span></small></p>
               </div>
               <div v-if="isShowExplain" class="flex justify-center py-3">
                 <button @click="hideExplain" class="text-[15px] px-4 btn_border rounded-xl text-[#045689]">Hide
