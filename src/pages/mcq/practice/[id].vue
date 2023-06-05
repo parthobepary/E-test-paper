@@ -1,15 +1,14 @@
 <template>
     <div class="container mx-auto">
-        <div>
             <!-- tab option -->
             <div class="bg-white py-3">
                 <div class="flex justify-between tab_bg px-1 rounded-md mx-2 py-1">
                     <div :class="isActive ? 'active' : ''" class="w-[50%] flex flex-col items-center rounded-sm pb-1">
-                        <button @click="active" class="text-[14px]">জ্ঞান ও অনুধাবন</button>
+                        <button @click="active" class="text-[13px]">জ্ঞান ও অনুধাবন</button>
                         <div :class="isActive ? 'block' : 'hidden'" class="w-12 h-1 rounded-lg bg-[#2E3192]"></div>
                     </div>
                     <div :class="!isActive ? 'active' : ''" class="w-[50%] flex flex-col items-center rounded-sm pb-1">
-                        <button @click="inActive" class="text-[14px]">প্রয়োগ ও উচ্চতর দক্ষতা</button>
+                        <button @click="inActive" class="text-[13px]">প্রয়োগ ও উচ্চতর দক্ষতা</button>
                         <div :class="!isActive ? 'block' : 'hidden'" class="w-12 h-1 rounded-lg bg-[#2E3192]"></div>
                     </div>
                 </div>
@@ -31,7 +30,6 @@
                 </div>
             </div>
         </div>
-    </div>
 </template>
 <script setup>
 

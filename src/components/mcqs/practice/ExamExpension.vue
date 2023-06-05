@@ -5,7 +5,7 @@
         <div class="mb-2 rounded-md w-full bg-white">
           <div @click="openSutter(i)"
             class="flex justify-between items-center cursor-pointer px-4 py-[4px] transition-all">
-            <p class="text-[18px]">{{ i + 1 + '.' }} <span v-katex="removeP(mcqs.question)" class="latex">
+            <p class="text-[14px]">{{ i + 1 + '.' }} <span v-katex="removeP(mcqs.question)" class="latex">
               </span></p>
             <p class="text-[14px] transition-all">
               <Icon color="#0462A1" :name="targetClick == i ? 'ion:ios-arrow-up' : 'ion:chevron-down'"></Icon>
@@ -25,14 +25,14 @@
                 </button>
               </div>
             </template>
-            <div>
+            <div v-if="mcqs.explain && mcqs.explain.length">
               <div v-if="!isShowExplain" class="flex justify-center py-3">
                 <button @click="showExplain" class="text-[15px] px-4 btn_border rounded-xl text-[#045689]">See
                   Explanation</button>
               </div>
               <div v-if="isShowExplain" class="bg-[#FDEAD2] px-3 rounded-md py-3">
                 <p><small class="text-[14px] leading-tight"><span class="text-[#5287A5]">Explanation : </span>{{
-                  mcq.explain }}</small></p>
+                  mcqs.explain }}</small></p>
               </div>
               <div v-if="isShowExplain" class="flex justify-center py-3">
                 <button @click="hideExplain" class="text-[15px] px-4 btn_border rounded-xl text-[#045689]">Hide
