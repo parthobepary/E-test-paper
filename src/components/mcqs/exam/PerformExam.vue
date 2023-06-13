@@ -6,8 +6,8 @@
         <p class=" text-[16px] pl-2">Questions : </p>
       </div>
       <template v-if="question && question.length">
-        <div v-for="item, i in question" :key="i">
-          <p class="text-[18px]">{{ i + 1 + '.' }} <span v-katex="removeP(item.question)" class="latex"> </span></p>
+        <div v-for="item, i in question" :key="i" class="pt-2">
+          <p class="text-[18px] py-4">{{ i + 1 + '.' }} <span v-katex="removeP(item.question)" class="latex"> </span></p>
 
 
           <!-- <div v-katex:auto v-html="item.question"></div> -->
@@ -47,7 +47,7 @@
 
     <div>
       <TransitionRoot appear :show="isOpen" as="template">
-        <Dialog as="div" @close="closeModal" class="relative z-50">
+        <Dialog as="div" class="relative z-50">
           <TransitionChild as="template" enter="duration-300 ease-out" enter-from="opacity-0" enter-to="opacity-100"
             leave="duration-200 ease-in" leave-from="opacity-100" leave-to="opacity-0">
             <div class="fixed inset-0 bg-black bg-opacity-25" />
@@ -126,7 +126,7 @@ const fakedata = [
 
 
 const selected = ref('')
-const emit = defineEmits(['submitAnswer'])
+const emit = defineEmits(['submitAnswer', 'closeModal'])
 
 const getDigit = (i) => {
   if (i == 0) return 'a . ';
@@ -141,10 +141,9 @@ const removeP = (item) => {
 };
 
 const closeModal = () => {
-  props.isOpen = false;
+  emit('closeModal', false)
 }
 const confirmModal = () => {
-  // here you write the question submit logic
   props.isOpen = false;
   emit('submitAnswer', true)
 }

@@ -3,11 +3,11 @@
         <Dialog as="div" @close="closeModal" class="relative z-50">
             <TransitionChild as="template" enter="duration-300 ease-out" enter-from="opacity-0" enter-to="opacity-100"
                 leave="duration-200 ease-in" leave-from="opacity-100" leave-to="opacity-0">
-                <div class="fixed inset-0 bg-black bg-opacity-25" />
+                <div class="fixed inset-0 bg-[#7A7A7D] bg-opacity-50" />
             </TransitionChild>
 
             <div class="fixed inset-0 overflow-y-auto">
-                <div class="flex min-h-full items-center justify-center p-2 text-center">
+                <div class="flex min-h-full items-center justify-center p-4 text-center">
                     <TransitionChild as="template" enter="duration-300 ease-out" enter-from="opacity-0 scale-95"
                         enter-to="opacity-100 scale-100" leave="duration-200 ease-in" leave-from="opacity-100 scale-100"
                         leave-to="opacity-0 scale-95">
@@ -24,7 +24,7 @@
                                 </div>
                             </div>
 
-                            <div class="flex justify-between">
+                            <div class="flex justify-between border-t-2 border-[#045E99]">
                                 <button type="button" class="text-black px-6 py-2 w-[50%]"
                                     @click="closeModal">
                                     cancel

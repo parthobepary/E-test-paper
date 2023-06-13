@@ -2,25 +2,22 @@
     <div class="container mx-auto">
         <div class="">
             <!-- exam header -->
-            <div class="flex justify-center">
-                <h2 class="py-3 text-[18px]">{{ exam.name }}</h2>
-            </div>
             <!-- timer -->
-            <div v-if="!isSubmit" class="flex justify-between items-center pr-4 pb-2">
-                <div class="px-2 flex items-center">
+            <div v-if="!isSubmit" class="flex justify-between items-center px-[20px] py-3">
+                <div class="flex items-center pt-6">
                     <div class="border_left"></div>
                     <p class=" text-[13px] pl-2">Remaining Time</p>
                 </div>
-                <div class="flex justify-between">
+                <div class="flex justify-between items-center pt-6">
                     <LazyMcqsExamTimer :validUntil="exam.details.valid_till" />
-                    <button @click="isSubmitAnswer" class="ml-2 text-[12px] px-2 rounded-md btn-submit text-white">সাবমিট করুন</button>
+                    <button @click="isSubmitAnswer" class="ml-2 text-[12px] px-2 py-2 rounded-md btn-submit text-white">সাবমিট করুন</button>
                 </div>
             </div>
             <!-- exam details -->
-            <div class="px-2 set_height">
+            <div class="set_height bg-[#F3F4FA] mt-3 px-[20px]">
                 <div>
                     <div v-if="!isSubmit">
-                        <LazyMcqsExamPerformExam :question="mcqs" :isOpen="isOpen" @submit-answer="submitAnswer($event)" />
+                        <LazyMcqsExamPerformExam :question="mcqs" :isOpen="isOpen" @closeModal="closeModal($event)" @submit-answer="submitAnswer($event)" />
                     </div>
                     <div v-else>
                         <ExamAnalysis :exam="data" />
@@ -355,6 +352,9 @@ const submitAnswer = (evn) => {
 
 const isSubmitAnswer = () => {
   isOpen.value = true
+}
+const closeModal = (ev) => {
+  isOpen.value = false
 }
 </script>
 <style scoped>

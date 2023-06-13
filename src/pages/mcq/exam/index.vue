@@ -1,15 +1,11 @@
 <template>
-    <div class="container mx-auto">
-        <div class="relative">
-            <!-- exam header -->
-            <div class="flex justify-center">
-                <h2 class="pt-10 pb-6">{{ exam.name }}</h2>
-            </div>
+    <div class="bg-[#F3F4FA]">
+        <div class="relative container mx-auto">
             <!-- exam details -->
-            <div class="bg-[#F3F4FA] py-4 set_height">
+            <div class="py-4 set_height">
                 <McqsExamDetails :details="exam.details" />
-                <div class="absolute bottom-0 pb-10 w-full text-center">
-                    <button @click="startExam" class="mb-4 text-[16px] w-[80%] text-center btn-bg text-white px-8 py-1 rounded-lg">Participate Exam</button>
+                <div class="absolute bottom-0 pb-[30px] w-full text-center">
+                    <button @click="startExam" class="mb-4 text-[16px] w-[88%] text-center btn-bg text-white px-8 py-2 rounded-lg">Participate Exam</button>
                     <McqsExamConfirmModal @close-modal="closeModal($event)" :is-open="isModal"/>
                 </div>
             </div>
@@ -141,6 +137,6 @@ const closeModal = () => {
     background: linear-gradient(102.17deg, #045689 0.04%, #0381E0 100%);
 }
 .set_height {
-    height: calc(100vh - 100px);
+    height: 100vh;
 }
 </style>
