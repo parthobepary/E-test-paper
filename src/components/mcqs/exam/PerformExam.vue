@@ -4,6 +4,7 @@
       <div class="flex items-center">
         <div class="border_left"></div>
         <p class=" text-[16px] pl-2">Questions : </p>
+        {{ selected }}
       </div>
       <template v-if="question && question.length">
         <div v-for="item, i in question" :key="i" class="pt-2">
@@ -14,13 +15,13 @@
 
 
           <div class="pl-1">
-            <RadioGroup v-model="selected">
+            <RadioGroup v-model="selected[i]" multiple>
               <RadioGroupLabel class="sr-only">Server size</RadioGroupLabel>
               <div class="space-y-2">
                 <RadioGroupOption as="template" v-for="(item, i) in item.options" :key="i" :value="item"
                   v-slot="{ active, checked }">
                   <div :class="[
-                    active
+                    checked
                       ? 'border-2 border-[#045D97] bg-[#F3FBFF]'
                       : 'border-2 border-gray-200',
                   ]" class="relative cursor-pointer rounded-md py-2 shadow-sm focus:outline-none">
@@ -125,7 +126,7 @@ const fakedata = [
 
 
 
-const selected = ref('')
+const selected = ref([])
 const emit = defineEmits(['submitAnswer', 'closeModal'])
 
 const getDigit = (i) => {
