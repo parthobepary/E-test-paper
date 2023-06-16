@@ -66,10 +66,10 @@
                       Are you sure to finish in the exam?
                     </p>
                     <div class="mt-6 px-5">
-                        <ul v-for="(it, i) in fakedata" :key="i">
-                          <li class="text-[14px]">{{ it }}</li>
-                        </ul>
-                      </div>
+                      <ul v-for="(it, i) in fakedata" :key="i">
+                        <li class="text-[14px]">{{ it }}</li>
+                      </ul>
+                    </div>
                   </DialogTitle>
 
                   <div class="mt-8 flex justify-center">
@@ -110,15 +110,19 @@ const props = defineProps({
     type: Boolean,
     default: false
   },
-  question:{
+  question: {
     type: Array,
-    default:[]
+    default: []
+  },
+  accessToken: {
+    type: [Number || String],
+    default: ''
   }
 });
 
 const fakedata = [
-    "Ensure uninterrupted internet .",
-    "After participating in the exam",
+  "Ensure uninterrupted internet .",
+  "After participating in the exam",
 ];
 
 // api data
@@ -137,8 +141,8 @@ const getDigit = (i) => {
 };
 
 const removeP = (item) => {
-    let pera = item.replace("p", "span")
-    return pera
+  let pera = item.replace("p", "span")
+  return pera
 };
 
 const closeModal = () => {
@@ -162,7 +166,7 @@ const confirmModal = () => {
 }
 
 li {
-    list-style: disc;
+  list-style: disc;
 }
 </style>
   
