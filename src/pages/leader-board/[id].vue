@@ -8,10 +8,10 @@
       </div>
       <div v-else class="w-full md:w-[60%] px-[20px]">
         <!-- first 3 -->
-        <div v-if="fakeRank && fakeRank.length">
+        <div v-if="rankings && rankings.length">
           <div class="flex justify-center items-end gap-x-2 h-[190px] w-full">
             <div class="overflow-hidden h-[170px] bg-white w-full rounded-lg shadow-md flex flex-col items-center">
-              <img class="h-16 w-16 mt-3" src="/images/rank/3.gif" alt="">
+              <img class="h-16 w-16 mt-3" src="/images/rank/2.gif" alt="">
               <div class="py-2 text-center">
                 <p class="text-[12px]">{{ rankings[0]?.user.name }}</p>
                 <p class="text-[10px]">{{ rankings[0]?.user.institute }}</p>
@@ -19,7 +19,7 @@
               </div>
             </div>
             <div class="overflow-hidden h-[190px] bg-white w-full rounded-lg shadow-md flex flex-col items-center">
-              <img class="h-16 w-16 mt-3" src="/images/rank/3.gif" alt="">
+              <img class="h-16 w-16 mt-3" src="/images/rank/1.gif" alt="">
               <div class="py-2 text-center">
                 <p class="text-[12px]">{{ rankings[1]?.user.name }}</p>
                 <p class="text-[10px]">{{ rankings[1]?.user.institute }}</p>
@@ -61,7 +61,7 @@
             </div>
           </div>
           <div class="flex justify-center">
-            <div v-if="userScore && Object.keys(userScore).length" class="fixed bottom-6 w-[86%]">
+            <div v-if="userScore && Object.keys(userScore).length" class="fixed bottom-1 w-[86%]">
               <div class="bg-[#E4EFFF] w-[100%] rounded-md px-3 py-2">
                 <div class="flex justify-between items-center">
                   <div>
@@ -77,6 +77,11 @@
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+        <div v-else>
+          <div class="flex justify-center items-center h-screen w-full">
+            <p>No data available</p>
           </div>
         </div>
       </div>

@@ -72,9 +72,9 @@ const init = async () => {
   if (error && error._value) {
     console.log(error);
   } else {
-    question.value = data.value.questions;
-    exam.value = data.value.exam;
-    duration.value = parseInt(data.value.exam.duration);
+    question.value = data?.value?.questions;
+    exam.value = data?.value?.exam;
+    duration.value = parseInt(data?.value?.exam?.duration);
     startTimer(duration.value * 60);
   }
   isLoading.value = false;
@@ -140,7 +140,8 @@ const submitAnswer = async (payload) => {
     body: payload,
   })
     .then((response) => {
-      alert('success')
+      // alert('success')
+      window.location = 'https://api.e-testpaper.com/api/exams/submission/success';
     })
     .catch((error) => {
       throw error;

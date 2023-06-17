@@ -5,43 +5,50 @@
         <div class="border_left"></div>
         <p class=" text-[14px] pl-2">Questions : </p>
       </div>
-      <template v-if="question && question.length">
-        <div v-for="items, i in question" :key="i" class="pt-2">
-          <p class="text-[18px] py-4">{{ i + 1 + '.' }} <span v-katex="removeP(items.question)" class="latex"> </span></p>
+      <div>
+        <div v-if="question && question.length">
+          <div v-for="items, i in question" :key="i" class="pt-2">
+            <p class="text-[18px] py-4">{{ i + 1 + '.' }} <span v-katex="removeP(items.question)" class="latex"> </span>
+            </p>
 
 
-          <!-- <div v-katex:auto v-html="item.question"></div> -->
+            <!-- <div v-katex:auto v-html="item.question"></div> -->
 
 
-          <div class="pl-1">
-            <RadioGroup v-model="selected[i]" multiple>
-              <RadioGroupLabel class="sr-only">Server size</RadioGroupLabel>
-              <div class="space-y-2">
-                <RadioGroupOption as="template" v-for="(item, ind) in items.options" :key="i" :value="item"
-                  v-slot="{ active, checked }">
-                  <div :class="[
-                    checked
-                      ? 'border-2 border-[#045D97] bg-[#F3FBFF]'
-                      : 'border-2 border-gray-200',
-                  ]" class="cursor-pointer rounded-md py-2 shadow-sm focus:outline-none">
-                    <div class="w-full">
-                      <div class="">
-                        <div class="text-sm pl-2">
-                          <RadioGroupLabel @click="ansUser(items, i, item)" as="p"
-                            :class="checked ? 'text-black' : 'text-gray-900'" class="text-[14px]">
-                            {{ getDigit(i) }}<span v-katex="item" class="latex"></span>
-                          </RadioGroupLabel>
+            <div class="pl-1">
+              <RadioGroup v-model="selected[i]" multiple>
+                <RadioGroupLabel class="sr-only">Server size</RadioGroupLabel>
+                <div class="space-y-2">
+                  <RadioGroupOption as="template" v-for="(item, ind) in items.options" :key="i" :value="item"
+                    v-slot="{ active, checked }">
+                    <div :class="[
+                      checked
+                        ? 'border-2 border-[#045D97] bg-[#F3FBFF]'
+                        : 'border-2 border-gray-200',
+                    ]" class="cursor-pointer rounded-md py-2 shadow-sm focus:outline-none">
+                      <div class="w-full">
+                        <div class="">
+                          <div class="text-sm pl-2">
+                            <RadioGroupLabel @click="ansUser(items, i, item)" as="p"
+                              :class="checked ? 'text-black' : 'text-gray-900'" class="text-[14px]">
+                              {{ getDigit(i) }}<span v-katex="item" class="latex"></span>
+                            </RadioGroupLabel>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                </RadioGroupOption>
-              </div>
-            </RadioGroup>
+                  </RadioGroupOption>
+                </div>
+              </RadioGroup>
+            </div>
           </div>
         </div>
-      </template>
-
+        <div v-else>
+          <div class="flex justify-center items-center h-screen w-full">
+            <p>No exam available</p>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- exam finished modal -->
