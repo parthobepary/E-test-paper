@@ -42,7 +42,6 @@
 </template>
 <script setup>
 import ExamAnalysis from '~~/src/components/mcqs/exam/ExamAnalysis.vue';
-import $api from "~/composables/useRequest"
 
 
 // mcqs get from api start
