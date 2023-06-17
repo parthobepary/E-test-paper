@@ -7,8 +7,8 @@
         {{ selected }}
       </div>
       <template v-if="question && question.length">
-        <div v-for="item, i in question" :key="i" class="pt-2">
-          <p class="text-[18px] py-4">{{ i + 1 + '.' }} <span v-katex="removeP(item.question)" class="latex"> </span></p>
+        <div v-for="items, i in question" :key="i" class="pt-2">
+          <p class="text-[18px] py-4">{{ i + 1 + '.' }} <span v-katex="removeP(items.question)" class="latex"> </span></p>
 
 
           <!-- <div v-katex:auto v-html="item.question"></div> -->
@@ -18,7 +18,7 @@
             <RadioGroup v-model="selected[i]" multiple>
               <RadioGroupLabel class="sr-only">Server size</RadioGroupLabel>
               <div class="space-y-2">
-                <RadioGroupOption as="template" v-for="(item, i) in item.options" :key="i" :value="item"
+                <RadioGroupOption as="template" v-for="(item, ind) in items.options" :key="i" :value="item"
                   v-slot="{ active, checked }">
                   <div :class="[
                     checked
@@ -28,8 +28,9 @@
                     <div class="w-full">
                       <div class="">
                         <div class="text-sm pl-2">
-                          <RadioGroupLabel as="p" :class="checked ? 'text-black' : 'text-gray-900'" class="text-[14px]">
-                            {{ getDigit(i) }} <span v-katex="item" class="latex"></span>
+                          <RadioGroupLabel @click="ansUser(items, i, item)" as="p"
+                            :class="checked ? 'text-black' : 'text-gray-900'" class="text-[14px]">
+                            {{ getDigit(i) }}<span v-katex="item" class="latex"></span>
                           </RadioGroupLabel>
                         </div>
                       </div>
@@ -114,6 +115,10 @@ const props = defineProps({
     type: Array,
     default: []
   },
+  exam: {
+    type: [Number || String],
+    default: ''
+  },
   accessToken: {
     type: [Number || String],
     default: ''
@@ -132,12 +137,32 @@ const fakedata = [
 
 const selected = ref([])
 const emit = defineEmits(['submitAnswer', 'closeModal'])
+const userAnswerWithQuestionId = ref([])
 
 const getDigit = (i) => {
   if (i == 0) return 'a . ';
   else if (i == 1) return 'b . ';
   else if (i == 2) return 'c . ';
   else return 'd . '
+};
+
+const ansUser = (items, ind, item) => {
+  const ans = {
+    id: items.id,
+    answer: item
+  };
+  const exists = userAnswerWithQuestionId.value.some(obj => obj.id === ans.id);
+  console.log(exists);
+
+  if (!exists) {
+    userAnswerWithQuestionId.value.push(ans)
+  } else {
+    userAnswerWithQuestionId.value.map(obj => {
+      if (obj.id === items.id) {
+        obj.answer = item;
+      }
+    });
+  }
 };
 
 const removeP = (item) => {
@@ -150,7 +175,27 @@ const closeModal = () => {
 }
 const confirmModal = () => {
   props.isOpen = false;
-  emit('submitAnswer', true)
+  const payLoad = {
+    exam_id: props.exam.id,
+    endedAt: props.exam.end_time,
+    createdAt: props.exam.start_time,
+    score: getCorrectAnsNum(),
+    response: userAnswerWithQuestionId.value
+  }
+  emit('submitAnswer', payLoad)
+  console.log(payLoad);
+}
+
+const getCorrectAnsNum = () => {
+  let count = 0;
+  selected.value.forEach((element, index) => {
+    props.question.forEach((el, ind) => {
+      if (index === ind && element == el.answer) {
+        count = count + 1;
+      }
+    });
+  });
+  return count;
 }
 </script>
 

@@ -28,11 +28,11 @@
         <div class="set_height bg-[#F3F4FA] mt-3 px-[20px]">
           <div>
             <div v-if="!isSubmit" class="pb-6">
-              <LazyMcqsExamPerformExam :access-token="accessToken" :question="exam" :isOpen="isOpen" @closeModal="closeModal($event)"
-                @submit-answer="submitAnswer($event)" />
+              <LazyMcqsExamPerformExam :exam="exam" :access-token="accessToken" :question="question" :isOpen="isOpen"
+                @closeModal="closeModal($event)" @submit-answer="submitAnswer($event)" />
             </div>
             <div v-else>
-              <ExamAnalysis :question="exam" />
+              <ExamAnalysis />
             </div>
           </div>
         </div>
@@ -42,12 +42,14 @@
 </template>
 <script setup>
 import ExamAnalysis from '~~/src/components/mcqs/exam/ExamAnalysis.vue';
+import $api from "~/composables/useRequest"
 
 
 // mcqs get from api start
 
 const isLoading = ref(false);
 const exam = ref([]);
+const question = ref([]);
 const duration = ref(null);
 let timeInSecs = ref(0);
 let timeTaken = ref(0);
@@ -56,15 +58,21 @@ const isSubmit = ref(false);
 const isOpen = ref(false);
 const route = useRoute();
 const accessToken = route.query.token;
+const id = route.params.id;
 
 
 const init = async () => {
   isLoading.value = true;
-  const { data, pending, error } = await useFetch('https://api.e-testpaper.com/api/exams/1/question?fbclid=IwAR3kZUC4OuSMUItvK2sq-ci74xmOxSUcapgJ3ub7FnDvmuHZ4WREXVOLjUA')
+  const { data, pending, error } = await useFetch(`https://api.e-testpaper.com/api/exams/${id}/question`, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`
+    }
+  })
   if (error && error._value) {
     console.log(error);
   } else {
-    exam.value = data.value.questions;
+    question.value = data.value.questions;
+    exam.value = data.value.exam;
     duration.value = parseInt(data.value.exam.duration);
     startTimer(duration.value * 60);
   }
@@ -94,8 +102,9 @@ function tick() {
   let mins = Math.floor(secs / 60);
   secs %= 60;
   let pretty = `${(mins < 10) ? "0" : ""}${mins}:${(secs < 10) ? "0" : ""}${secs}`;
-
-  document.getElementById("countdown").innerHTML = pretty;
+  if (!isSubmit.value) {
+    document.getElementById("countdown").innerHTML = pretty;
+  }
 }
 
 onUnmounted(() => {
@@ -105,6 +114,7 @@ onUnmounted(() => {
 watch(timeInSecs, (newValue) => {
   if (newValue === 0) {
     console.log('tims up');
+    submitAnswer()
   }
 });
 
@@ -117,10 +127,26 @@ const warning = () => {
     return "border-green-500 bg-green-500";
   }
 };
-// mcqs get from api end
+// mcqs get from api end https://api.e-testpaper.com/api/exams/submission
 
-const submitAnswer = (evn) => {
-  isSubmit.value = evn
+const submitAnswer = async (payload) => {
+  isSubmit.value = true;
+  isLoading.value = true;
+  await $fetch(`https://api.e-testpaper.com/api/exams/submission`, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`
+    },
+    method: "POST",
+    body: payload,
+  })
+    .then((response) => {
+      alert('success')
+    })
+    .catch((error) => {
+      throw error;
+    });
+  isLoading.value = false;
+
 }
 
 const isSubmitAnswer = () => {
