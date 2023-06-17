@@ -7,25 +7,27 @@
       <div class="">
         <!-- exam header -->
         <!-- timer -->
-        <div v-if="!isSubmit" class="flex justify-between items-center px-[20px] py-3">
-          <div class="flex items-center pt-6">
-            <div class="border_left"></div>
-            <p class=" text-[20px] pl-2">Remaining Time</p>
-          </div>
-          <div class="flex justify-between items-center pt-6">
-            <!-- timer -->
-            <div v-show="!isSubmit" class="flex gap-3 items-center">
-              <p class="text-[20px] hidden md:block">Remaining time</p>
-              <div class="rounded-xl border-2 px-5 py-1" :class="warning()">
-                <span id="countdown" style="font-weight: bold; font-size: 14px; color: white;"></span>
-              </div>
+        <div class="fixed w-full top-0">
+          <div v-if="!isSubmit" class="flex justify-between items-center px-[20px] py-3 bg-white w-full">
+            <div class="flex items-center pt-6">
+              <div class="border_left"></div>
+              <p class=" text-[14px] pl-2">Remaining Time</p>
             </div>
-            <button @click="isSubmitAnswer" class="ml-2 text-[12px] px-2 py-2 rounded-md btn-submit text-white">সাবমিট
-              করুন</button>
+            <div class="flex justify-between items-center pt-6">
+              <!-- timer -->
+              <div v-show="!isSubmit" class="flex gap-3 items-center">
+                <p class="text-[20px] hidden md:block">Remaining time</p>
+                <div class="rounded-xl border-2 px-2 py-1" :class="warning()">
+                  <span id="countdown" style="font-weight: bold; font-size: 14px; color: white;"></span>
+                </div>
+              </div>
+              <button @click="isSubmitAnswer" class="ml-2 text-[14px] px-2 py-2 rounded-md btn-submit text-white">সাবমিট
+                করুন</button>
+            </div>
           </div>
         </div>
         <!-- exam details -->
-        <div class="set_height bg-[#F3F4FA] mt-3 px-[20px]">
+        <div class="set_height bg-[#F3F4FA] pt-12 px-[20px]">
           <div>
             <div v-if="!isSubmit" class="pb-6">
               <LazyMcqsExamPerformExam :exam="exam" :access-token="accessToken" :question="question" :isOpen="isOpen"
@@ -112,7 +114,6 @@ onUnmounted(() => {
 
 watch(timeInSecs, (newValue) => {
   if (newValue === 0) {
-    console.log('tims up');
     submitAnswer()
   }
 });

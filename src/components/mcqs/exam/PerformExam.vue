@@ -3,8 +3,7 @@
     <div class="pt-3">
       <div class="flex items-center">
         <div class="border_left"></div>
-        <p class=" text-[16px] pl-2">Questions : </p>
-        {{ selected }}
+        <p class=" text-[14px] pl-2">Questions : </p>
       </div>
       <template v-if="question && question.length">
         <div v-for="items, i in question" :key="i" class="pt-2">
@@ -24,7 +23,7 @@
                     checked
                       ? 'border-2 border-[#045D97] bg-[#F3FBFF]'
                       : 'border-2 border-gray-200',
-                  ]" class="relative cursor-pointer rounded-md py-2 shadow-sm focus:outline-none">
+                  ]" class="cursor-pointer rounded-md py-2 shadow-sm focus:outline-none">
                     <div class="w-full">
                       <div class="">
                         <div class="text-sm pl-2">
@@ -152,7 +151,6 @@ const ansUser = (items, ind, item) => {
     answer: item
   };
   const exists = userAnswerWithQuestionId.value.some(obj => obj.id === ans.id);
-  console.log(exists);
 
   if (!exists) {
     userAnswerWithQuestionId.value.push(ans)
