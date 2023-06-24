@@ -1,37 +1,33 @@
 <template>
   <div>
     <div class="pt-3">
-      <div class="flex items-center">
-        <div class="border_left"></div>
-        <p class=" text-[14px] pl-2">Questions : </p>
+      <div class="flex items-center pt-[18px]">
+        <div class="border_left rounded-md"></div>
+        <p class=" text-[16px] pl-2 font-[Poppins]">Questions : </p>
       </div>
       <div>
         <div v-if="question && question.length">
           <div v-for="items, i in question" :key="i" class="pt-2">
-            <p class="text-[18px] py-4">{{ i + 1 + '.' }} <span v-katex="removeP(items.question)" class="latex"> </span>
+            <p class="text-[14px] font-[Poppins] py-[10px]">{{ i + 1 + '.' }} <span v-katex="removeP(items.question)" class="latex font-[Poppins]"> </span>
             </p>
-
-
             <!-- <div v-katex:auto v-html="item.question"></div> -->
-
-
-            <div class="pl-1">
+            <div class="">
               <RadioGroup v-model="selected[i]" multiple>
                 <RadioGroupLabel class="sr-only">Server size</RadioGroupLabel>
-                <div class="space-y-2">
+                <div :class="selected[i]?.length? 'bg-white px-2': ''" class="space-y-2 py-[10px] rounded-[8px]">
                   <RadioGroupOption as="template" v-for="(item, ind) in items.options" :key="i" :value="item"
-                    v-slot="{ active, checked }">
+                    v-slot="{ active, checked }" class="">
                     <div :class="[
                       checked
-                        ? 'border-2 border-[#045D97] bg-[#F3FBFF]'
-                        : 'border-2 border-gray-200',
-                    ]" class="cursor-pointer rounded-md py-2 shadow-sm focus:outline-none">
+                        ? 'border-2 border-[#045D97] bg-[#F3FBFF] p-[10px]'
+                        : selected[i]?.length ? 'border-none bg-[#FFFFFF] shadow-sm' : 'border-[1px] border-[#95bbda] bg-white px-2 ',
+                    ]" class="cursor-pointer rounded-[8px] py-[10px]">
                       <div class="w-full">
                         <div class="">
-                          <div class="text-sm pl-2">
+                          <div class="text-[14px] pl-1">
                             <RadioGroupLabel @click="ansUser(items, i, item)" as="p"
                               :class="checked ? 'text-black' : 'text-gray-900'" class="text-[14px]">
-                              {{ getDigit(i) }}<span v-katex="item" class="latex"></span>
+                              {{ getDigit(i) }}<span v-katex="item" class="latex font-[Poppins]"></span>
                             </RadioGroupLabel>
                           </div>
                         </div>
@@ -68,19 +64,19 @@
                 leave-to="opacity-0 scale-95">
                 <DialogPanel
                   class="w-full pt-3 md:w-[30%] transform overflow-hidden rounded-2xl bg-white text-left align-middle shadow-xl transition-all">
-                  <DialogTitle as="h3" class="pt-6 px-6 text-lg font-medium leading-6 text-center">
-                    <p class="">
-                      Are you sure to finish in the exam?
+                  <DialogTitle as="h3" class="px-[20px] pt-[20px] text-lg font-medium leading-6 text-center">
+                    <p class="text-[20px]">
+                      Are you sure to finish in the exam ?
                     </p>
                     <div class="mt-6 px-5">
                       <ul v-for="(it, i) in fakedata" :key="i">
-                        <li class="text-[14px]">{{ it }}</li>
+                        <li class="text-[14px] text-justify">{{ it }}</li>
                       </ul>
                     </div>
                   </DialogTitle>
 
-                  <div class="mt-8 flex justify-center">
-                    <button type="button" class=" text-black px-6 py-2 w-full" @click="closeModal">
+                  <div class="mt-8 flex justify-center border-t-[1px] border-[#0377CC]">
+                    <button type="button" class=" text-black px-6 py-2 w-full bg-[#F5F6FF]" @click="closeModal">
                       Cancel
                     </button>
                     <button class="bg-color text-white px-6 py-2 w-full" @click="confirmModal">
@@ -132,8 +128,9 @@ const props = defineProps({
 });
 
 const fakedata = [
-  "Ensure uninterrupted internet .",
-  "After participating in the exam",
+  "Revise whether you have answered all the questions correctly before completing the exam.",
+  "If any question is left unanswered will be treated as an incorrect answer.",
+  "Once you complete the exam, you will not be able to participate in this exam again."
 ];
 
 // api data
@@ -212,7 +209,7 @@ const getCorrectAnsNum = () => {
 .border_left {
   background: linear-gradient(102.17deg, #045689 0.04%, #0381E0 100%);
   width: 4px;
-  height: 10px;
+  height: 9px;
 }
 
 li {

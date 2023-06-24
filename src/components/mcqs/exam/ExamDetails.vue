@@ -4,31 +4,31 @@
             <tbody>
                 <tr>
                     <td>Exam Type</td>
-                    <td>{{ details.exam_type }}</td>
+                    <td class="text-[#127CC8] font-extrabold">{{ details.exam_type }}</td>
                 </tr>
                 <tr>
                     <td>Exam Mode</td>
-                    <td>{{ details.exam_mode }}</td>
+                    <td class="text-[#127CC8] font-extrabold">{{ details.exam_mode }}</td>
                 </tr>
                 <tr>
                     <td>Exam Duration</td>
-                    <td>{{ details.exam_duration }}</td>
+                    <td class="text-[#127CC8] font-extrabold">{{ details.exam_duration }}</td>
                 </tr>
                 <tr>
                     <td>Per Question Mark</td>
-                    <td>{{ details.per_question_mark }}</td>
+                    <td class="text-[#127CC8] font-extrabold">{{ details.per_question_mark }}</td>
                 </tr>
                 <tr>
                     <td>Negative Mark</td>
-                    <td>{{ details.negative_mark }}</td>
+                    <td class="text-[#127CC8] font-extrabold">{{ details.negative_mark }}</td>
                 </tr>
                 <tr>
                     <td>Exam Starts At</td>
-                    <td>{{ details.exam_start_time }}</td>
+                    <td class="text-[#127CC8] font-extrabold">{{ details.exam_start_time }}</td>
                 </tr>
                 <tr>
                     <td>Exam Ends At</td>
-                    <td>{{ details.exam_end_time }}</td>
+                    <td class="text-[#127CC8] font-extrabold">{{ details.exam_end_time }}</td>
                 </tr>
             </tbody>
         </table>

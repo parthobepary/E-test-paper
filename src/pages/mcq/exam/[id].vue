@@ -7,34 +7,34 @@
       <div class="">
         <!-- exam header -->
         <!-- timer -->
-        <div class="fixed w-full top-0">
+        <div class="fixed w-full top-n2" style="z-index: 19999 !important;">
           <div v-if="!isSubmit" class="flex justify-between items-center px-[20px] py-3 bg-white w-full">
-            <div class="flex items-center pt-6">
-              <div class="border_left"></div>
-              <p class=" text-[14px] pl-2">Remaining Time</p>
+            <div class="flex items-center">
+              <div class="border_left rounded-md"></div>
+              <p class=" text-[14px] pl-2 font-[Poppins]">Remaining Time</p>
             </div>
-            <div class="flex justify-between items-center pt-6">
+            <div class="flex justify-between items-center">
               <!-- timer -->
               <div v-show="!isSubmit" class="flex gap-3 items-center">
-                <p class="text-[20px] hidden md:block">Remaining time</p>
-                <div class="rounded-xl border-2 px-2 py-1" :class="warning()">
-                  <span id="countdown" style="font-weight: bold; font-size: 14px; color: white;"></span>
+                <p class="text-[14px] hidden md:block">Remaining time</p>
+                <div class="rounded-lg border-2 border-[#236E9E] px-2 py-1">
+                  <span id="countdown" style="font-weight: bold; font-family: Poppins; font-size: 20px; color: #236E9E; padding: 0px 6px;"></span>
                 </div>
               </div>
-              <button @click="isSubmitAnswer" class="ml-2 text-[14px] px-2 py-2 rounded-md btn-submit text-white">সাবমিট
+              <button @click="isSubmitAnswer" class="ml-2 text-[14px] px-2 py-2 rounded-md btn-submit font-[Poppins] text-white">সাবমিট
                 করুন</button>
             </div>
           </div>
         </div>
         <!-- exam details -->
-        <div class="set_height bg-[#F3F4FA] pt-12 px-[20px]">
+        <div class="set_height bg-[#F3F4FA] pt-12 px-[18px]">
           <div>
             <div v-if="!isSubmit" class="pb-6">
               <LazyMcqsExamPerformExam :exam="exam" :access-token="accessToken" :question="question" :isOpen="isOpen"
                 @closeModal="closeModal($event)" @submit-answer="submitAnswer($event)" />
             </div>
             <div v-else>
-              <ExamAnalysis />
+              <!-- <ExamAnalysis /> -->
             </div>
           </div>
         </div>
@@ -118,15 +118,15 @@ watch(timeInSecs, (newValue) => {
   }
 });
 
-const warning = () => {
-  if (timeInSecs.value < 60) {
-    return "border-red-500 bg-red-500";
-  } else if (timeInSecs.value < 300) {
-    return "border-yellow-500 bg-yellow-500";
-  } else {
-    return "border-green-500 bg-green-500";
-  }
-};
+// const warning = () => {
+//   if (timeInSecs.value < 60) {
+//     return "border-red-500 bg-red-500";
+//   } else if (timeInSecs.value < 300) {
+//     return "border-yellow-500 bg-yellow-500";
+//   } else {
+//     return "border-green-500 bg-green-500";
+//   }
+// };
 // mcqs get from api end https://api.e-testpaper.com/api/exams/submission
 
 const submitAnswer = async (payload) => {
@@ -165,7 +165,7 @@ const closeModal = (ev) => {
 .border_left {
   background: linear-gradient(102.17deg, #045689 0.04%, #0381E0 100%);
   width: 4px;
-  height: 10px;
+  height: 9px;
 }
 
 .btn-submit {
