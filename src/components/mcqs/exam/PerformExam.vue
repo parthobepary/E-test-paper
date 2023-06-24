@@ -20,7 +20,7 @@
                     <div :class="[
                       checked
                         ? 'border-2 border-[#045D97] bg-[#F3FBFF] p-[10px]'
-                        : selected[i]?.length ? 'border-none bg-[#FFFFFF] shadow-sm' : 'border-[1px] border-[#95bbda] bg-white px-2 ',
+                        : selected[i]?.length ? 'border-none bg-[#FFFFFF] shadow-sm px-2' : 'border-[1px] border-[#95bbda] bg-white px-2 ',
                     ]" class="cursor-pointer rounded-[8px] py-[10px]">
                       <div class="w-full">
                         <div class="">
