@@ -8,19 +8,19 @@
             </div>
             <div v-else>
                 <div class="px-[20px] py-[15px]">
-                    <div class="flex items-center pb-2">
-                        <div class="border_left"></div>
-                        <p class=" text-[14px] pl-2">Questions Review : </p>
+                    <div class="flex items-center pb-[24.5px]">
+                        <div class="border_left rounded-md"></div>
+                        <p class=" text-[16px] pl-2">Questions Review : </p>
                     </div>
                     <div v-if="results && results.length">
                         <div v-for="res, i in results" :key="i">
-                            <p class="py-3"><span>{{ i + 1 + "." }}</span> <span v-katex="res.question"></span></p>
+                            <p class="py-[10px]"><span class="text-[14px] font-[Poppins]">{{ i + 1 + "." }}</span> <span v-katex="res.question" class="text-[14px] font-[Poppins]"></span></p>
                             <div v-for="op, i in res.options" :key="i">
                                 <div :class="op == res.answer ? 'bg-[#E0FFE7]' : res.userAnswer == op ? 'bg-[#FFE8E3]' : 'bg-white'"
-                                    class="flex justify-between items-center mb-3 py-2 rounded-md px-2">
-                                    <p>{{ getDigit(i) }} <span v-katex="op"></span></p>
+                                    class="flex justify-between items-center mb-3 py-1 rounded-md px-2">
+                                    <p class="text-[14px] font-[Poppins]">{{ getDigit(i) }} <span class="text-[14px] font-[Poppins]" v-katex="op"></span></p>
                                     <p>
-                                        <icon size="30"
+                                        <icon size="24"
                                             :color="op == res.answer ? '#31CB18' : res.userAnswer == op ? 'red' : ''"
                                             :name="op == res.answer ? res.userAnswer == op ? 'heroicons-solid:check-circle' : '' : res.userAnswer == op ? 'ic:baseline-cancel' : ''" />
                                     </p>

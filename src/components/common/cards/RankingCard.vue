@@ -4,8 +4,8 @@
       <div :class="position == 'first' ? '': 'md:mt-6'" class="w-20 h-20 md:w-40 md:h-40 rounded-full bg-[#2a5bbc]">
       </div>
       <div :class="position == 'first' ? 'md:mt-[50px]': 'md:mt-8 mt-4'" class="py-4">
-        <p class="text-center text-[14px]">{{ rank?.name }}</p>
-        <p class="text-center text-[14px]">{{ rank?.institution }}</p>
+        <p class="text-center text-[14px] font-[Poppins]">{{ rank?.name }}</p>
+        <p class="text-center text-[14px] font-[Poppins]">{{ rank?.institution }}</p>
         <div class="flex justify-center gap-4">
           <div class="flex items-center">
             <p class="text-[14px]">
@@ -14,7 +14,7 @@
                 name="streamline:interface-time-clock-circle-clock-loading-measure-time-circle"
               />
             </p>
-            <p class="pl-2 text-[14px]">{{ rank?.duration }}sec</p>
+            <p class="pl-2 text-[14px] font-[Poppins]">{{ rank?.duration }}sec</p>
           </div>
           <div class="flex items-center">
             <p class="text-[14px]">
@@ -23,7 +23,7 @@
                 name="streamline:interface-lighting-light-bulb-lighting-light-incandescent-bulb-lights"
               />
             </p>
-            <p class="pl-2 text-[14px]">
+            <p class="pl-2 text-[14px] font-[Poppins]">
               {{ rank?.marks }}
             </p>
           </div>

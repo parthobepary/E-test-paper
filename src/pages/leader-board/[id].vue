@@ -10,7 +10,7 @@
         <!-- first 3 -->
         <div v-if="rankings && rankings.length">
           <div class="flex justify-center items-end gap-x-2 h-[210px] w-full">
-            <div class="overflow-hidden h-[190px] bg-white w-full rounded-lg shadow-md flex flex-col items-center">
+            <div v-if="rankings[0]" class="overflow-hidden h-[190px] bg-white w-full rounded-lg shadow-md flex flex-col items-center">
               <img class="h-16 w-16 mt-3" src="/images/rank/2.gif" alt="">
               <div class="py-2 text-center">
                 <p class="text-[12px]">{{ rankings[0]?.user.name }}</p>
@@ -18,7 +18,7 @@
                 <p class="text-[12px]">Score : {{ rankings[0]?.score }}</p>
               </div>
             </div>
-            <div class="overflow-hidden h-[210px] bg-white w-full rounded-lg shadow-md flex flex-col items-center">
+            <div v-if="rankings[1]" class="overflow-hidden h-[210px] bg-white w-full rounded-lg shadow-md flex flex-col items-center">
               <img class="h-16 w-16 mt-3" src="/images/rank/1.gif" alt="">
               <div class="py-2 text-center">
                 <p class="text-[12px]">{{ rankings[1]?.user.name }}</p>
@@ -26,7 +26,7 @@
                 <p class="text-[12px]">Score : {{ rankings[1]?.score }}</p>
               </div>
             </div>
-            <div class="overflow-hidden h-[190px] bg-white w-full rounded-lg shadow-md flex flex-col items-center">
+            <div v-if="rankings[2]" class="overflow-hidden h-[190px] bg-white w-full rounded-lg shadow-md flex flex-col items-center">
               <img class="h-16 w-16 mt-3" src="/images/rank/3.gif" alt="">
               <div class="py-2 text-center">
                 <p class="text-[12px]">{{ rankings[2]?.user.name }}</p>
@@ -40,21 +40,21 @@
             <div class="rank-card" v-for="(rank, i) in rankings.slice(3)" :key="i">
               <div
                 :class="rank?.user?.user_id == userScore?.user?._id ? 'border-2 border-blue-500 bg-[#E9F8FF] py-2' : 'bg-white py-2'"
-                class="rounded-md my-2 justify-between flex items-center px-2">
+                class="rounded-md my-2 justify-between flex items-center px-2 font-[Poppins]">
                 <div class="flex w-[100%] items-center">
                   <div
                     class="w-10 mr-4 h-10 bg-[#E4EFFF] text-[#045C96] text-[14px] flex justify-center items-center rounded-lg">
                     {{ i + 4 }}
                   </div>
                   <div class="w-[50%] text-left">
-                    <p class="text-[14px] leading-none">{{ rank?.user?.name }}</p>
-                    <p class="text-[12px] text-gray-600 first-line:leading-none pt-2">{{ rank?.user?.institute }}</p>
+                    <p class="text-[14px] leading-none font-[Poppins]">{{ rank?.user?.name }}</p>
+                    <p class="text-[12px] text-gray-600 first-line:leading-none pt-2 font-[Poppins]">{{ rank?.user?.institute }}</p>
                   </div>
                 </div>
                 <div class=" my-[-5px] flex-end">
                   <div class="">
-                    <p class="text-[14px]">Score</p>
-                    <p class="text-center text-[14px]"> {{ rank.score }} </p>
+                    <p class="text-[14px] font-[Poppins]">Score</p>
+                    <p class="text-center text-[14px] font-[Poppins]"> {{ rank.score }} </p>
                   </div>
                 </div>
               </div>
@@ -65,18 +65,18 @@
               <div class="bg-[#b6cac8] py-3 rounded-md my-2 justify-between flex items-center px-2">
                 <div class="flex w-[100%] items-center">
                   <div
-                    class="w-10 mr-4 h-10 bg-[#E4EFFF] text-[#045C96] text-[14px] flex justify-center items-center rounded-lg">
+                    class="w-10 mr-4 h-10 bg-[#E4EFFF] text-[#045C96] text-[14px] flex justify-center items-center rounded-lg font-[Poppins]">
                     {{ userScore?.rank }}
                   </div>
                   <div class="w-[50%] text-left">
-                    <p class="text-[14px] leading-none">{{ userScore?.user?.name }}</p>
-                    <p class="text-[12px] first-line:leading-none pt-2">{{ userScore?.user?.institute }}</p>
+                    <p class="text-[14px] leading-none font-[Poppins]">{{ userScore?.user?.name }}</p>
+                    <p class="text-[10px] first-line:leading-none pt-2 font-[Poppins]">{{ userScore?.user?.institute }}</p>
                   </div>
                 </div>
                 <div class=" my-[-5px] flex-end">
                   <div class="">
-                    <p class="text-[14px]">Score</p>
-                    <p class="text-center text-[14px]"> {{ userScore?.score }} </p>
+                    <p class="text-[12px] font-[Poppins]">Score</p>
+                    <p class="text-center text-[12px] font-[Poppins]"> {{ userScore?.score }} </p>
                   </div>
                 </div>
               </div>

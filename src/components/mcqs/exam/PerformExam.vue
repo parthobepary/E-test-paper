@@ -20,7 +20,7 @@
                     <div :class="[
                       checked
                         ? 'border-2 border-[#045D97] bg-[#F3FBFF] p-[10px]'
-                        : selected[i]?.length ? 'border-none bg-[#FFFFFF] shadow-sm px-2' : 'border-[1px] border-[#95bbda] bg-white px-2 ',
+                        : selected[i]?.length ? 'border-none bg-[#FFFFFF] shadow-md px-2' : 'border-[1px] border-[#95bbda] bg-white px-2 ',
                     ]" class="cursor-pointer rounded-[8px] py-[10px]">
                       <div class="w-full">
                         <div class="">
@@ -58,15 +58,15 @@
           </TransitionChild>
 
           <div class="fixed inset-0 overflow-y-auto">
-            <div class="flex min-h-full items-center justify-center p-4 text-center">
+            <div class="flex min-h-full items-center justify-center p-[20px] text-center">
               <TransitionChild as="template" enter="duration-300 ease-out" enter-from="opacity-0 scale-95"
                 enter-to="opacity-100 scale-100" leave="duration-200 ease-in" leave-from="opacity-100 scale-100"
                 leave-to="opacity-0 scale-95">
                 <DialogPanel
-                  class="w-full pt-3 md:w-[30%] transform overflow-hidden rounded-2xl bg-white text-left align-middle shadow-xl transition-all">
+                  class="w-full  md:w-[30%] transform overflow-hidden rounded-2xl bg-white text-left align-middle shadow-xl transition-all">
                   <DialogTitle as="h3" class="px-[20px] pt-[20px] text-lg font-medium leading-6 text-center">
                     <p class="text-[20px]">
-                      Are you sure to finish in the exam ?
+                      Are you sure to finish in the test ?
                     </p>
                     <div class="mt-6 px-5">
                       <ul v-for="(it, i) in fakedata" :key="i">
